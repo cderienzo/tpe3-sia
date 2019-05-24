@@ -48,9 +48,9 @@ for generation in range(num_generations):
     offspring_mutation = genetic_algorithm.gene_mutation(offspring_crossover,mutation_prob=0.6)
 
     # Select which ones make it to the new generation
-    fitness = genetic_algorithm.cal_pop_fitness(offspring_mutation)
-    accumulated_fitness = genetic_algorithm.cal_accum_fitness(offspring_mutation, fitness)
     total_pool = numpy.append(parents,offspring_mutation,axis=0)
+    fitness = genetic_algorithm.cal_pop_fitness(total_pool)
+    accumulated_fitness = genetic_algorithm.cal_accum_fitness(total_pool, fitness)
     next_generation = genetic_algorithm.roulette_select_mating_pool(total_pool, accumulated_fitness, pop_size[0])
     new_population = next_generation
     # Creating the new population based on the parents and offspring.
