@@ -57,6 +57,7 @@ for generation in range(num_generations):
     #new_population[0:parents.shape[0], :] = parents
     #new_population[parents.shape[0]:, :] = offspring_mutation
 
+    fitness = genetic_algorithm.cal_pop_fitness(new_population)
     # The best result in the current iteration.
     best_match_idx = numpy.where(fitness == numpy.max(fitness))
     index = best_match_idx[0][0]
