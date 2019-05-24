@@ -16,8 +16,16 @@ def cal_pop_fitness(pop):
         skill = float(arms[2])+ float(boots[2])+ float(helmets[2]) + float(gloves[2]) + float(vests[2])
         resistence = float(arms[3])+ float(boots[3])+ float(helmets[3]) + float(gloves[3]) + float(vests[3])
         life = float(arms[4])+ float(boots[4])+ float(helmets[4]) + float(gloves[4]) + float(vests[4])
+        
+        strength = 100*numpy.tanh(0.01*strength)
+        agility = numpy.tanh(0.01*agility)
+        skill = 0.6*numpy.tanh(0.01*skill)
+        resistence = numpy.tanh(0.01*resistence)
+        life = 100*numpy.tanh(0.01*life)
+
         atm = 0.5 - pow((3*2-5),4) + pow((3*2-5),2) + 2/2
         dem = 2 + pow((3*2-5),4)- pow((3*2-5),2) - 2/2
+        
         attack = (agility * skill) * strength * atm
         defense = (resistence * skill) * life * dem
         fitness = 0.1*attack + 0.9*defense
