@@ -17,7 +17,7 @@ Genetic algorithm parameters:
     Mating pool size
     Population size
 """
-sol_per_pop = 8
+sol_per_pop = 10
 num_parents_mating = 4
 
 # Defining the population size.
@@ -34,19 +34,30 @@ for generation in range(num_generations):
     fitness = genetic_algorithm.cal_pop_fitness(new_population)
 
     # Selecting the best parents in the population for mating.
-    parents = genetic_algorithm.select_mating_pool(new_population, fitness, 
+    # If roulette and bla calculate accumulated fitness
+    accumulated_fitness = genetic_algorithm.cal_accum_fitness(new_population,fitness)
+
+    parents = genetic_algorithm.roulette_select_mating_pool(new_population, accumulated_fitness, 
                                       num_parents_mating)
 
     # Generating next generation using crossover.
-    offspring_crossover = genetic_algorithm.crossover(parents,
-                                       offspring_size=(pop_size[0]-parents.shape[0], num_weights))
+    offspring_crossover = genetic_algorithm.one_point_crossover(parents,
+                                       offspring_size=(2*(parents.shape[0]), num_weights))
 
     # Adding some variations to the offsrping using mutation.
-    offspring_mutation = genetic_algorithm.mutation(offspring_crossover)
+    offspring_mutation = genetic_algorithm.gene_mutation(offspring_crossover,mutation_prob=0.6)
+
+    print(parents)
+    print(offspring_mutation)
+    # Select which ones make it to the new generation
+    fitness = genetic_algorithm.cal_pop_fitness(offspring_mutation)
+    accumulated_fitness = genetic_algorithm.cal_accum_fitness(offspring_mutation, fitness)
+    total_pool = numpy.concatenate(parents,offspring_mutation)
+    next_generation = genetic_algorithm.roulette_select_mating_pool(total_pool, accumulated_fitness, pop_size[0])
 
     # Creating the new population based on the parents and offspring.
-    new_population[0:parents.shape[0], :] = parents
-    new_population[parents.shape[0]:, :] = offspring_mutation
+    #new_population[0:parents.shape[0], :] = parents
+    #new_population[parents.shape[0]:, :] = offspring_mutation
 
     # The best result in the current iteration.
     best_match_idx = numpy.where(fitness == numpy.max(fitness))
