@@ -25,7 +25,7 @@ def cal_pop_fitness(pop):
 
         atm = 0.5 - pow((3*2-5),4) + pow((3*2-5),2) + 2/2
         dem = 2 + pow((3*2-5),4)- pow((3*2-5),2) - 2/2
-        
+
         attack = (agility * skill) * strength * atm
         defense = (resistence * skill) * life * dem
         fitness = 0.1*attack + 0.9*defense
@@ -55,6 +55,10 @@ def roulette_select_mating_pool(pop, accumulated_fitness, k_num):
     for i in range(k_num):
         for k in range(len(accumulated_fitness)):
             if k > 0 and accumulated_fitness[k] > roulette_values[i] and accumulated_fitness[k-1] < roulette_values[i]:
+                parents[p] = pop[k]
+                p+=1
+                break
+            elif accumulated_fitness[k] > roulette_values[i]:
                 parents[p] = pop[k]
                 p+=1
                 break
