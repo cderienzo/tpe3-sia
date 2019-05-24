@@ -39,7 +39,7 @@ def cal_accum_fitness(pop, fitness):
 
 def roulette_select_mating_pool(pop, accumulated_fitness, k_num):
     # Selecting the best individuals in the current generation as parents for producing the offspring of the next generation.
-    parents = numpy.empty((k_num, pop.shape[1]))
+    parents = numpy.zeros((k_num, pop.shape[1]),numpy.int8)
     roulette_values = numpy.random.uniform(low=0.0,high=1.0, size=k_num)
     i=0
     k=0
@@ -53,7 +53,7 @@ def roulette_select_mating_pool(pop, accumulated_fitness, k_num):
     return parents
 
 def one_point_crossover(parents, offspring_size):
-    offspring = numpy.empty(offspring_size)
+    offspring = numpy.zeros(offspring_size,numpy.int8)
     # The point at which crossover takes place between two parents. 
     crossover_point = numpy.random.randint(low=0, high=offspring_size[1])
     i = 0
@@ -125,7 +125,7 @@ def multigene_mutation(offspring_crossover, mutation_prob):
             # Perform mutation on individual if random number < mutation_probability
             if(numpy.random.random_sample() < mutation_prob):
                 random_value = numpy.random.uniform(-1.0, 1.0, 1)
-                offspring_crossover[idx, idy] = offspring_crossover[idx, idy] + random_value
+                offspring_crossover[idx, idy] = offspring_crossover[idx, idy]
     return offspring_crossover
 
 def select_new_generation(offspring, parents, pop_size):
