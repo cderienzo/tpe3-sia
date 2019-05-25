@@ -26,10 +26,14 @@ class Config:
     mutation_prob = 0.6
 
     #  1 = Elite, 2 = Ruleta, 3 = Universal, 4 = Boltzmann, 5 = Torneos1, 6 = Torneos2, 7 = Ranking
-    selection = 1
+    A = 0.5
+    selection_method_1 = 1
+    selection_method_2 = 2
 
     # 1 = Metodo1, 2 = Metodo2, 3 = Metodo3
-    replacement_method = 1
+    B = 0.5
+    replacement_method_1 = 1
+    replacement_method_2 = 2
 
     # 1 = Maxima cantidad de generaciones, 2 = Estructura,  3 = Contenido, 4 = Entorno a un  optimo
     finish_criteria = 1

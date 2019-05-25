@@ -44,8 +44,19 @@ class Loader:
     def item_count(self):
         with open(Config.files[0]) as item:
             return sum(1 for line in item)
+
+    def replacement(number):
+        switcher = {
+        1: one,
+        2: two,
+        3: three,
+        4: four
+        }    
+        if (number == 1):
+            return switcher.get(Config.replacement_method_1)
+        return switcher.get(Config.replacement_method_2)           
     
-    def select():
+    def select(number):
         switcher = {
         1: elite,
         2: roulette,
@@ -55,8 +66,9 @@ class Loader:
         6: tournaments2,
         7: ranking
         }
-        # Get the function from switcher dictionary
-        return switcher.get(Config.selection)
+        if (number == 1):
+            return switcher.get(Config.selection_method_1)
+        return switcher.get(Config.selection_method_2)    
 
     def crossover():
         switcher = {
@@ -74,13 +86,4 @@ class Loader:
         2: multigene
         }
         # Get the function from switcher dictionary
-        return switcher.get(Config.mutation_geneticity)
-
-    def replacement():
-        switcher = {
-        1: one,
-        2: two,
-        3: three,
-        4: four
-        }    
-        return switcher.get(Config.replacement_method)
+        return switcher.get(Config.mutation_geneticity) 

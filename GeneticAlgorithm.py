@@ -18,7 +18,13 @@ class GeneticAlgorithm():
         return population
 
     def replacement(self, population):
-        return Loader.replacement()(self, population)    
+        population_1 = Loader.replacement(1)(self, population)
+        population_2 = Loader.replacement(2)(self, population)
+
+        sample_1 = random.sample(population_1, Config.B)
+        sample_2 = random.sample(population_2, 1 - Config.B)
+
+        return numpy.append(sample_1, sample_2)
 
     def fitness(self, population):
     # Calculating the fitness value of each solution in the current population.   
@@ -51,7 +57,13 @@ class GeneticAlgorithm():
         return fitness_vector
 
     def select_mating_pool(self, population, fitness):
-        return Loader.select()(population, fitness)
+        population_1 = Loader.select(1)(population, fitness)
+        population_2 = Loader.select(2)(population, fitness)
+
+        sample_1 = random.sample(population_1, Config.A)
+        sample_2 = random.sample(population_2, 1 - Config.A)
+
+        return numpy.append(sample_1, sample_2)
 
     def crossover(self, parents):
         return Loader.crossover()(parents)
