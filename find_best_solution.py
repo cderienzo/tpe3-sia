@@ -1,6 +1,5 @@
 import numpy
-from genetic_algorithm import GeneticAlgorithm
-import Items
+from GeneticAlgorithm import GeneticAlgorithm
 from Config import Config
 
 GA = GeneticAlgorithm()

@@ -1,16 +1,15 @@
 import numpy
 import random
-from Items import Items
 from Config import Config
 from Loader import Loader
 
 class GeneticAlgorithm():
-    
+
     # Create an initial seed population
     def seed(self):
         population = list()
         for individual in range(Config.population_size):
-            population.append({'height': random.uniform(Config.min_height, Config.max_height), 'items': numpy.random.randint(0, self.item_count, self.items_count)})
+            population.append({'height': random.uniform(Config.min_height, Config.max_height), 'items': numpy.random.randint(0, Loader.item_count(), Loader.items_count())})
         return population
 
     def replacement(self, population):
