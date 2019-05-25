@@ -54,8 +54,7 @@ class Loader:
         switcher = {
         1: one,
         2: two,
-        3: three,
-        4: four
+        3: three
         }    
         if (number == 1):
             return switcher.get(Config.replacement_method_1)

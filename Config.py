@@ -17,6 +17,8 @@ class Config:
     # 1 = Cruce de un punto, 2 = Cruce de dos puntos, 3 = Cruce uniforme, 4 = Cruce anular
     crossover = 1
 
+    uniform_crossover_p = 0.5
+
     # 1 = Gen, 2 = MultiGen
     mutation_geneticity = 1
 

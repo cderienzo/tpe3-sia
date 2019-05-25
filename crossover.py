@@ -1,65 +1,61 @@
 import numpy
 from Config import Config
-import Loader
+from Loader import Loader
+from offspring import *
 
-def one_point(parents):
-    offspring_size = (2 * Config.num_parents_mating, Loader.item_count())
-    offspring = numpy.zeros(offspring_size,numpy.int8)
-    # The point at which crossover takes place between two parents. 
-    crossover_point = numpy.random.randint(low=0, high=offspring_size[1])
-    i = 0
-    for k in range(parents.shape[0]):
-        # Index of the first parent to mate.
-        parent1_idx = k%parents.shape[0]
-        # Index of the second parent to mate.
-        parent2_idx = (k+1)%parents.shape[0]
-        # The new offspring will have its first half of its genes taken from the first parent.
-        offspring[i, 0:crossover_point] = parents[parent1_idx, 0:crossover_point]
-        offspring[i+1, 0:crossover_point] = parents[parent2_idx, 0:crossover_point]
-        # The new offspring will have its second half of its genes taken from the second parent.
-        offspring[i, crossover_point:] = parents[parent2_idx, crossover_point:]
-        offspring[i+1, crossover_point:] = parents[parent1_idx, crossover_point:]
-        i+=2
-    return offspring
+def one_point(parent1, parent2):
+    offspring1 = create_offspring()
+    offspring2 = create_offspring()
 
-def two_points(parents, offspring_size):
-    offspring = numpy.empty(offspring_size)
-    # The points at which crossover takes place between two parents. 
-    crossover_point_1 = numpy.random.randint(low=0, high=offspring_size[1])
-    crossover_point_2 = numpy.random.randint(low=crossover_point_1, high=offspring_size[1])
-    i = 0
-    for k in range(offspring_size[0]):
-        # Index of the first parent to mate.
-        parent1_idx = k%parents.shape[0]
-        # Index of the second parent to mate.
-        parent2_idx = (k+1)%parents.shape[0]
-        # The new offspring will have from start to first crosspoint taken from the first parent.
-        offspring[i, 0:crossover_point_1] = parents[parent1_idx, 0:crossover_point_1]
-        offspring[i+1, 0:crossover_point_1] = parents[parent2_idx, 0:crossover_point_1]
-        # The new offspring will have from first crosspoint to second crosspoint taken from the second parent.
-        offspring[i, crossover_point_1:crossover_point_2] = parents[parent2_idx, crossover_point_1:crossover_point_2]
-        offspring[i+1, crossover_point_1:crossover_point_2] = parents[parent1_idx, crossover_point_1:crossover_point_2]
-        # The new offspring will have from second crosspoint to the end taken from the first parent.
-        offspring[k, crossover_point_2:] = parents[parent1_idx, crossover_point_2:]
-        offspring[k, crossover_point_2:] = parents[parent2_idx, crossover_point_2:]
-    return offspring
+    crossover_point = numpy.random.randint(low=0, high=Loader.items_count())
+    
+    offspring1['height'] = parent1['height']
+    offspring2['height'] = parent2['height']
 
-def uniform(parents, offspring_size, prob):
-    offspring = numpy.empty(offspring_size)
+    offspring1['items'][0:crossover_point] = parent1['items'][0:crossover_point]
+    offspring2['items'][0:crossover_point] = parent2['items'][0:crossover_point]
 
-    for k in range(offspring_size[0]):
-        for b in range(offspring_size[1]):             
-            # Index of the first parent to mate.
-            parent1_idx = k%parents.shape[0]
-            # Index of the second parent to mate.
-            parent2_idx = (k+1)%parents.shape[0]
+    offspring1['items'][crossover_point:] = parent2['items'][crossover_point:]
+    offspring2['items'][crossover_point:] = parent1['items'][crossover_point:]
 
-            offspring[k] = parents[parent1_idx].copy()
-            offspring[k+1] = parents[parent2_idx].copy()
+    return [offspring1, offspring2]
 
-            if(numpy.random.random_sample()<prob):
-                offspring[k][b],  offspring[k+1][b] = offspring[k+1][b], offspring[k][b]
-    return offspring
+def two_points(parent1, parent2):
+    offspring1 = create_offspring()
+    offspring2 = create_offspring()
+
+    crossover_point_1 = numpy.random.randint(low=0, high=Loader.items_count())
+    crossover_point_2 = numpy.random.randint(low=crossover_point_1, high=Loader.items_count())
+
+    offspring1['height'] = parent1['height']
+    offspring2['height'] = parent2['height']
+
+    offspring1['items'][0:crossover_point_1] = parent1[0:crossover_point_1]
+    offspring2['items'][0:crossover_point_1] = parent2[0:crossover_point_1]
+
+    offspring1['items'][crossover_point_1:crossover_point_2] = parent2[crossover_point_1:crossover_point_2]
+    offspring2['items'][crossover_point_1:crossover_point_2] = parent1[crossover_point_1:crossover_point_2]
+
+    offspring1['items'][crossover_point_2:] = parent1[crossover_point_2:]
+    offspring2['items'][crossover_point_2:] = parent2[crossover_point_2:]
+
+    return [offspring1, offspring2]
+
+def uniform(parent1, parent2):
+    offspring1 = create_offspring()
+    offspring2 = create_offspring()
+
+    rand_height = numpy.random.rand()
+
+    offspring1['height'] = parent1['height'] if rand_height >= Config.uniform_crossover_p else parent2['height']
+    offspring2['height'] = parent2['height'] if rand_height >= Config.uniform_crossover_p else parent1['height']
+
+    for i in range(0, Config.items_count):
+        p = numpy.random.rand()
+        
+        offspring1['items'][i] = parent1['items'][i] if(p>=Config.uniform_crossover_p) else parent2['items'][i]
+        offspring2['items'][i] = parent2['items'][i] if(p>=Config.uniform_crossover_p) else parent1['items'][i]
+    return [offspring1, offspring2]
 
 def anular(parents):
     # TODO
