@@ -1,6 +1,9 @@
 import numpy
+from Config import Config
+import Loader
 
-def one_point_crossover(parents, offspring_size):
+def one_point(parents):
+    offspring_size = (2 * Config.num_parents_mating, Loader.item_count())
     offspring = numpy.zeros(offspring_size,numpy.int8)
     # The point at which crossover takes place between two parents. 
     crossover_point = numpy.random.randint(low=0, high=offspring_size[1])
@@ -19,7 +22,7 @@ def one_point_crossover(parents, offspring_size):
         i+=2
     return offspring
 
-def two_point_crossover(parents, offspring_size):
+def two_points(parents, offspring_size):
     offspring = numpy.empty(offspring_size)
     # The points at which crossover takes place between two parents. 
     crossover_point_1 = numpy.random.randint(low=0, high=offspring_size[1])
@@ -41,7 +44,7 @@ def two_point_crossover(parents, offspring_size):
         offspring[k, crossover_point_2:] = parents[parent2_idx, crossover_point_2:]
     return offspring
 
-def uniform_crossover(parents, offspring_size, prob):
+def uniform(parents, offspring_size, prob):
     offspring = numpy.empty(offspring_size)
 
     for k in range(offspring_size[0]):
@@ -57,3 +60,7 @@ def uniform_crossover(parents, offspring_size, prob):
             if(numpy.random.random_sample()<prob):
                 offspring[k][b],  offspring[k+1][b] = offspring[k+1][b], offspring[k][b]
     return offspring
+
+def anular(parents):
+    # TODO
+    return None    
