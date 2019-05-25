@@ -15,7 +15,7 @@ def four(GA, population):
     return None
 
 
-# Measing the fitness of each chromosome in the population.    
+# Measuring the fitness of each chromosome in the population.    
 fitness = GA.fitness(population)
 
 parents = GA.select_mating_pool(population, fitness)
@@ -23,7 +23,7 @@ parents = GA.select_mating_pool(population, fitness)
 # Generating next generation.
 offspring_crossover = GA.crossover(parents)
 
-# Adding some variations to the offsrping.
+# Mutating some of the offspring.
 offspring_mutation = GA.mutation(offspring_crossover)
 
 # Select which ones make it to the new generation
