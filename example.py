@@ -1,6 +1,11 @@
 import numpy
 import genetic_algorithm
 import item_reader
+from config import *
+from crossover import *
+from mutation import *
+from replacement import * 
+from selection import * 
 """
 The target is to maximize the performance:
     performance = 0.1*attack + 0.9*defense
@@ -37,21 +42,21 @@ for generation in range(num_generations):
     # If roulette and bla calculate accumulated fitness
     accumulated_fitness = genetic_algorithm.cal_accum_fitness(new_population,fitness)
 
-    parents = genetic_algorithm.roulette_select_mating_pool(new_population, accumulated_fitness, 
+    parents = roulette_select_mating_pool(new_population, accumulated_fitness, 
                                       num_parents_mating)
 
     # Generating next generation using crossover.
-    offspring_crossover = genetic_algorithm.one_point_crossover(parents,
+    offspring_crossover = one_point_crossover(parents,
                                        offspring_size=(2*(parents.shape[0]), num_weights))
 
     # Adding some variations to the offsrping using mutation.
-    offspring_mutation = genetic_algorithm.gene_mutation(offspring_crossover,mutation_prob=0.6)
+    offspring_mutation = gene_mutation(offspring_crossover,mutation_prob=0.6)
 
     # Select which ones make it to the new generation
     total_pool = numpy.append(parents,offspring_mutation,axis=0)
     fitness = genetic_algorithm.cal_pop_fitness(total_pool)
     accumulated_fitness = genetic_algorithm.cal_accum_fitness(total_pool, fitness)
-    next_generation = genetic_algorithm.roulette_select_mating_pool(total_pool, accumulated_fitness, pop_size[0])
+    next_generation = roulette_select_mating_pool(total_pool, accumulated_fitness, pop_size[0])
     new_population = next_generation
     # Creating the new population based on the parents and offspring.
     #new_population[0:parents.shape[0], :] = parents
