@@ -32,13 +32,13 @@ class Loader:
 
     files = ['testdata/armas.tsv', 'testdata/botas.tsv', 'testdata/cascos.tsv', 'testdata/guantes.tsv', 'testdata/pecheras.tsv']                                      
 
-    attack_multiplier = Loader.characters[Config.character]['attack_multiplier']
-    defense_multiplier = Loader.characters[Config.character]['defense_multiplier']
-    strength_multiplier = Loader.characters[Config.character]['options'][Config.character_num][0]
-    agility_multiplier = Loader.characters[Config.character]['options'][Config.character_num][1]
-    skill_multiplier = Loader.characters[Config.character]['options'][Config.character_num][2]
-    resistence_multiplier = Loader.characters[Config.character]['options'][Config.character_num][3]
-    life_multiplier = Loader.characters[Config.character]['options'][Config.character_num][4]
+    attack_multiplier = characters[Config.character]['attack_multiplier']
+    defense_multiplier = characters[Config.character]['defense_multiplier']
+    strength_multiplier = characters[Config.character]['options'][Config.character_num][0]
+    agility_multiplier = characters[Config.character]['options'][Config.character_num][1]
+    skill_multiplier = characters[Config.character]['options'][Config.character_num][2]
+    resistence_multiplier = characters[Config.character]['options'][Config.character_num][3]
+    life_multiplier = characters[Config.character]['options'][Config.character_num][4]
 
     def item_value(id, item_id):
         return pandas.read_csv(Loader.files[item_id], names=['id', 'strength', 'agility', 'skill', 'resistence', 'life'], skiprows=id, nrows=1, delimiter='\t')
