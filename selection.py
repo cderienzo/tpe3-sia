@@ -60,8 +60,21 @@ def tournaments1(population, fitness, GA):
     return selection
 
 def tournaments2(population, fitness, GA):
-    # TODO
-    return None
+    selection = []
+    for i in range(Config.num_parents_mating):
+        participants = numpy.random.randint(low=0, high = len(population), size= 2)
+        if numpy.random.random_sample() < 0.75:
+            if fitness[participants[0]] < fitness[participants[1]]:
+                selection.append(participants[1])
+            else:
+                selection.append(participants[0])
+        else:
+            if fitness[participants[0]] < fitness[participants[1]]:
+                selection.append(participants[0])
+            else:
+                selection.append(participants[1])
+
+    return selection
 
 def ranking(population, fitness, GA):
     # TODO
