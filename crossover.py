@@ -29,14 +29,14 @@ def two_points(parent1, parent2):
     offspring1['height'] = parent1['height']
     offspring2['height'] = parent2['height']
 
-    offspring1['items'][0:crossover_point_1] = parent1[0:crossover_point_1]
-    offspring2['items'][0:crossover_point_1] = parent2[0:crossover_point_1]
+    offspring1['items'][0:crossover_point_1] = parent1['items'][0:crossover_point_1]
+    offspring2['items'][0:crossover_point_1] = parent2['items'][0:crossover_point_1]
 
-    offspring1['items'][crossover_point_1:crossover_point_2] = parent2[crossover_point_1:crossover_point_2]
-    offspring2['items'][crossover_point_1:crossover_point_2] = parent1[crossover_point_1:crossover_point_2]
+    offspring1['items'][crossover_point_1:crossover_point_2] = parent2['items'][crossover_point_1:crossover_point_2]
+    offspring2['items'][crossover_point_1:crossover_point_2] = parent1['items'][crossover_point_1:crossover_point_2]
 
-    offspring1['items'][crossover_point_2:] = parent1[crossover_point_2:]
-    offspring2['items'][crossover_point_2:] = parent2[crossover_point_2:]
+    offspring1['items'][crossover_point_2:] = parent1['items'][crossover_point_2:]
+    offspring2['items'][crossover_point_2:] = parent2['items'][crossover_point_2:]
 
     return [offspring1, offspring2]
 
