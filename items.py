@@ -10,4 +10,4 @@ def items_count():
 
 def item_count():
     with open('testdata/armas.tsv') as item:
-        return sum(1 for line in item)
+        return sum(1 for line in item) - 2
