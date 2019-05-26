@@ -6,13 +6,22 @@ GA = GeneticAlgorithm()
 
 population = GA.seed()
 
-for generation in range(Config.num_generations):
-    print("Generation : %d" % generation)
-    population = GA.replacement(population)
-
+print("--------------------------------------------------------------------------")
+print("Generation :  0")
+print("--------------------------------------------------------------------------")
 fitness = GA.fitness(population)
 best_match_idx = numpy.where(fitness == numpy.max(fitness))
 index = best_match_idx[0][0]
-
-print("Best solution : ", population[index])
-print("Best solution fitness : ", fitness[index])
+print("best solution : ", population[index])
+print("best solution fitness : ", fitness[index])
+print("-------------------------------------------------------------------------")
+for generation in range(0,Config.num_generations):
+    population = GA.replacement(population)
+    print("Generation : ", generation+1)
+    print("-------------------------------------------------------------------------")
+    fitness = GA.fitness(population)
+    best_match_idx = numpy.where(fitness == numpy.max(fitness))
+    index = best_match_idx[0][0]
+    print("best solution : ", population[index])
+    print("best solution fitness : ", fitness[index])
+    print("-------------------------------------------------------------------------")
