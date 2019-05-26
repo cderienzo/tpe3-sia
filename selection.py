@@ -14,8 +14,9 @@ def roulette(population, fitness, GA):
         for k in range(len(accumulated_fitness)):
             if k > 0 and accumulated_fitness[k] > roulette_values[i] and accumulated_fitness[k-1] < roulette_values[i]:
                 parents.append(population[k])
-            elif accumulated_fitness[k] > roulette_values[i]:
+            elif k==0 and accumulated_fitness[k] > roulette_values[i]:
                 parents.append(population[k])
+
     return parents
 
 def universal(population, fitness, GA):

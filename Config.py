@@ -4,33 +4,33 @@ class Config:
 
     character_num = 2
 
-    population_size = 10
+    population_size = 100
 
-    num_parents_mating = 4
+    num_parents_mating = 70
 
-    num_generations = 5
+    num_generations = 20
 
     min_height = 1.3
     
     max_height = 2
 
     # 1 = Cruce de un punto, 2 = Cruce de dos puntos, 3 = Cruce uniforme, 4 = Cruce anular
-    crossover = 1
+    crossover = 2
 
     uniform_crossover_p = 0.5
 
     # 1 = Gen, 2 = MultiGen
-    mutation_geneticity = 1
+    mutation_geneticity = 2
 
     # 1 = Uniforme, 2 = No Uniforme
-    mutation_uniformity = 1
+    mutation_uniformity = 2
 
     mutation_prob = 0.6
 
     #  1 = Elite, 2 = Ruleta, 3 = Universal, 4 = Boltzmann, 5 = Torneos1, 6 = Torneos2, 7 = Ranking
     A = 0.5
-    selection_method_1 = 1
-    selection_method_2 = 2
+    selection_method_1 = 2
+    selection_method_2 = 3
 
     # 1 = Metodo1, 2 = Metodo2, 3 = Metodo3
     B = 0.5
