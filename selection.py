@@ -22,7 +22,7 @@ def universal(population, fitness, GA):
     r = numpy.random.uniform(low=0.0,high=1.0)
     r_j = []
 
-    for j in range(1,Config.num_parents_mating):
+    for j in range(1, Config.num_parents_mating + 1):
         r_j.append((r+j-1)/Config.num_parents_mating)
 
     accumulated_fitness = accum_fitness(fitness)

@@ -17,8 +17,11 @@ class GeneticAlgorithm():
         population_1 = Loader.replacement(1)(self, population)
         population_2 = Loader.replacement(2)(self, population)
 
-        sample_1 = random.sample(population_1, Config.B)
-        sample_2 = random.sample(population_2, 1 - Config.B)
+        size_1 = int(Config.B * len(population_1))
+        size_2 = int((1 - Config.B) * len(population_1))
+
+        sample_1 = random.sample(population_1, size_1)
+        sample_2 = random.sample(population_2, size_2)
 
         return numpy.append(sample_1, sample_2)
 
@@ -27,20 +30,10 @@ class GeneticAlgorithm():
         fitness_vector = list()
         for individual in population:
             arms = item_value(individual['items'][0], 0)
-            if (arms.empty):
-                print("arms id:" + str(individual['items'][0]))
             boots = item_value(individual['items'][1], 1)
-            if (boots.empty):
-                print("boots id:" + str(individual['items'][1]))
             helmets = item_value(individual['items'][2], 2)
-            if (helmets.empty):
-                print("helmets id:" + str(individual['items'][2]))
             gloves = item_value(individual['items'][3], 3)
-            if (gloves.empty):
-                print("gloves id:" + str(individual['items'][3]))
             vests = item_value(individual['items'][4], 4)
-            if (vests.empty):
-                print("vests id:" + str(individual['items'][4]))
                 
             strength = arms['strength'][0] + boots['strength'][0] + helmets['strength'][0] + gloves['strength'][0] + vests['strength'][0]
             agility = arms['agility'][0] + boots['agility'][0] + helmets['agility'][0] + gloves['agility'][0] + vests['agility'][0]
@@ -67,8 +60,11 @@ class GeneticAlgorithm():
         population_1 = Loader.select(1)(population, fitness, GA)
         population_2 = Loader.select(2)(population, fitness, GA)
 
-        sample_1 = random.sample(population_1, Config.A)
-        sample_2 = random.sample(population_2, 1 - Config.A)
+        size_1 = int(Config.A * len(population_1))
+        size_2 = int((1 - Config.A) * len(population_1))
+
+        sample_1 = random.sample(population_1, size_1)
+        sample_2 = random.sample(population_2, size_2)
 
         return numpy.append(sample_1, sample_2)
 
