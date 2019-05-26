@@ -31,11 +31,11 @@ class GeneticAlgorithm():
             helmets = item_value(individual['items'][2], 2)
             gloves = item_value(individual['items'][3], 3)
             vests = item_value(individual['items'][4], 4)
-            strength = arms[0] + boots[0] + helmets[0] + gloves[0] + vests[0]
-            agility = arms[1] + boots[1] + helmets[1] + gloves[1] + vests[1]
-            skill = arms[2] + boots[2] + helmets[2] + gloves[2] + vests[2]
-            resistence = arms[3] + boots[3] + helmets[3] + gloves[3] + vests[3]
-            life = arms[4] + boots[4]+ helmets[4] + gloves[4] + vests[4]
+            strength = arms['strength'] + boots['strength'] + helmets['strength'] + gloves['strength'] + vests['strength']
+            agility = arms['agility'] + boots['agility'] + helmets['agility'] + gloves['agility'] + vests['agility']
+            skill = arms['skill'] + boots['skill'] + helmets['skill'] + gloves['skill'] + vests['skill']
+            resistence = arms['resistence'] + boots['resistence'] + helmets['resistence'] + gloves['resistence'] + vests['resistence']
+            life = arms['life'] + boots['life']+ helmets['life'] + gloves['life'] + vests['life']
             
             strength = 100 * numpy.tanh(0.01 * Loader.strength_multiplier * strength)
             agility = numpy.tanh(0.01 * Loader.agility_multiplier * agility)
