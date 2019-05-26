@@ -1,7 +1,6 @@
 import numpy
 from Config import Config
 from items import *
-from offspring import *
 
 def one_point(parent1, parent2):
     offspring1 = create_offspring()
@@ -50,7 +49,7 @@ def uniform(parent1, parent2):
     offspring1['height'] = parent1['height'] if rand_height >= Config.uniform_crossover_p else parent2['height']
     offspring2['height'] = parent2['height'] if rand_height >= Config.uniform_crossover_p else parent1['height']
 
-    for i in range(0, Config.items_count):
+    for i in range(0, items_count()):
         p = numpy.random.rand()
         
         offspring1['items'][i] = parent1['items'][i] if(p>=Config.uniform_crossover_p) else parent2['items'][i]
@@ -59,4 +58,7 @@ def uniform(parent1, parent2):
 
 def anular(parents):
     # TODO
-    return None    
+    return None  
+
+def create_offspring():
+    return {'height': 0, 'items': numpy.zeros(items_count()) }

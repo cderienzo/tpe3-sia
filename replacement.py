@@ -1,5 +1,6 @@
 import numpy
-import Config
+import random
+from Config import Config
 
 def one(GA, population):
     offspring = []

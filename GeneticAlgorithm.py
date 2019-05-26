@@ -61,8 +61,8 @@ class GeneticAlgorithm():
 
         return numpy.append(sample_1, sample_2)
 
-    def crossover(self, parents):
-        return Loader.crossover()(parents)
+    def crossover(self, parent1, parent2):
+        return Loader.crossover()(parent1, parent2)
 
     def mutation(self, offspring):
         # TODO revisar que cambia random
