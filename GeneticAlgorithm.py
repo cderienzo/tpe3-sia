@@ -27,16 +27,27 @@ class GeneticAlgorithm():
         fitness_vector = list()
         for individual in population:
             arms = item_value(individual['items'][0], 0)
+            if (arms.empty):
+                print("arms id:" + str(individual['items'][0]))
             boots = item_value(individual['items'][1], 1)
+            if (boots.empty):
+                print("boots id:" + str(individual['items'][1]))
             helmets = item_value(individual['items'][2], 2)
+            if (helmets.empty):
+                print("helmets id:" + str(individual['items'][2]))
             gloves = item_value(individual['items'][3], 3)
+            if (gloves.empty):
+                print("gloves id:" + str(individual['items'][3]))
             vests = item_value(individual['items'][4], 4)
-            strength = arms['strength'] + boots['strength'] + helmets['strength'] + gloves['strength'] + vests['strength']
-            agility = arms['agility'] + boots['agility'] + helmets['agility'] + gloves['agility'] + vests['agility']
-            skill = arms['skill'] + boots['skill'] + helmets['skill'] + gloves['skill'] + vests['skill']
-            resistence = arms['resistence'] + boots['resistence'] + helmets['resistence'] + gloves['resistence'] + vests['resistence']
-            life = arms['life'] + boots['life']+ helmets['life'] + gloves['life'] + vests['life']
-            
+            if (vests.empty):
+                print("vests id:" + str(individual['items'][4]))
+                
+            strength = arms['strength'][0] + boots['strength'][0] + helmets['strength'][0] + gloves['strength'][0] + vests['strength'][0]
+            agility = arms['agility'][0] + boots['agility'][0] + helmets['agility'][0] + gloves['agility'][0] + vests['agility'][0]
+            skill = arms['skill'][0] + boots['skill'][0] + helmets['skill'][0] + gloves['skill'][0] + vests['skill'][0]
+            resistence = arms['resistence'][0] + boots['resistence'][0] + helmets['resistence'][0] + gloves['resistence'][0] + vests['resistence'][0]
+            life = arms['life'][0] + boots['life'][0] + helmets['life'][0] + gloves['life'][0] + vests['life'][0]
+
             strength = 100 * numpy.tanh(0.01 * Loader.strength_multiplier * strength)
             agility = numpy.tanh(0.01 * Loader.agility_multiplier * agility)
             skill = 0.6 * numpy.tanh(0.01 * Loader.skill_multiplier * skill)
