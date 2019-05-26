@@ -2,8 +2,8 @@ import numpy
 from Config import Config
 
 def elite(population, fitness):
-    # TODO
-    return None
+    population.sort()
+    return population[len(population) - Config.num_parents_mating:]
 
 def roulette(population, fitness):
     accumulated_fitness = accum_fitness(fitness)
