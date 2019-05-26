@@ -46,8 +46,18 @@ def boltzmann(population, fitness, GA):
     return None
 
 def tournaments1(population, fitness, GA):
-    # TODO
-    return None
+    selection = []
+    for i in range(Config.tournament_rounds):
+        participants = numpy.random.randint(low=0, high=len(population), size=Config.num_parents_mating)
+        index = -1
+        for p in range(Config.num_parents_mating):
+            if index == -1:
+                index = participants[0]
+            elif fitness[index] < fitness[(participants[p])]:
+                index = participants[p]
+            selection.append(population[index])
+
+    return selection
 
 def tournaments2(population, fitness, GA):
     # TODO

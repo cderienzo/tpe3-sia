@@ -32,6 +32,9 @@ class Config:
     selection_method_1 = 2
     selection_method_2 = 3
 
+    # Rounds for tournament selection method
+    tournament_rounds = 3
+
     # 1 = Metodo1, 2 = Metodo2, 3 = Metodo3
     B = 0.5
     replacement_method_1 = 1
