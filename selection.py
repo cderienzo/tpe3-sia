@@ -65,14 +65,14 @@ def tournaments2(population, fitness, GA):
         participants = numpy.random.randint(low=0, high = len(population), size= 2)
         if numpy.random.random_sample() < 0.75:
             if fitness[participants[0]] < fitness[participants[1]]:
-                selection.append(participants[1])
+                selection.append(population[participants[1]])
             else:
-                selection.append(participants[0])
+                selection.append(population[participants[0]])
         else:
             if fitness[participants[0]] < fitness[participants[1]]:
-                selection.append(participants[0])
+                selection.append(population[participants[0]])
             else:
-                selection.append(participants[1])
+                selection.append(population[participants[1]])
 
     return selection
 
