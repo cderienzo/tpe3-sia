@@ -10,7 +10,7 @@ class GeneticAlgorithm():
     def seed(self):
         population = list()
         for individual in range(Config.population_size):
-            population.append({'height': random.uniform(Config.min_height, Config.max_height), 'items': numpy.random.randint(0, item_count(), items_count())})
+            population.append({'height': random.uniform(Config.min_height, Config.max_height), 'items': list(numpy.random.randint(0, item_count(), items_count()))})
         return population
 
     def replacement(self, population):
@@ -23,7 +23,7 @@ class GeneticAlgorithm():
         sample_1 = random.sample(population_1, size_1)
         sample_2 = random.sample(population_2, size_2)
 
-        return numpy.append(sample_1, sample_2)
+        return sample_1.extend(sample_2)
 
     def fitness(self, population):
     # Calculating the fitness value of each solution in the current population.   
@@ -66,7 +66,7 @@ class GeneticAlgorithm():
         sample_1 = random.sample(population_1, size_1)
         sample_2 = random.sample(population_2, size_2)
 
-        return numpy.append(sample_1, sample_2)
+        return sample_1.extend(sample_2)
 
     def crossover(self, parent1, parent2):
         return Loader.crossover()(parent1, parent2)

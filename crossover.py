@@ -61,4 +61,4 @@ def anular(parents):
     return None  
 
 def create_offspring():
-    return {'height': 0, 'items': numpy.zeros(items_count()) }
+    return {'height': 0, 'items': [0] * items_count() }
