@@ -56,9 +56,32 @@ def uniform(parent1, parent2):
         offspring2['items'][i] = parent2['items'][i] if(p>=Config.uniform_crossover_p) else parent1['items'][i]
     return [offspring1, offspring2]
 
-def anular(parents):
-    # TODO
-    return None  
+def anular(parent1, parent2):
+    offspring1 = create_offspring()
+    offspring2 = create_offspring()
+    
+    crossover_point = numpy.random.randint(low=0, high=items_count())
+    crossover_l = numpy.random.randint(low=1,high=(item_count()/2))
+    
+    offspring1['height'] = parent1['height']
+    offspring2['height'] = parent2['height']
+    
+    if crossover_point + crossover_l < items_count():
+        offspring1['items'][0:crossover_point] = parent1[0:crossover_point]
+        offspring1['items'][crossover_point:crossover_point+crossover_l] = parent2[crossover_point:crossover_point+crossover_l]
+        offspring1['items'][crossover_point+crossover_l:] = parent1[crossover_point+crossover_l:]
+        offspring2['items'][0:crossover_point] = parent2[0:crossover_point]
+        offspring2['items'][crossover_point:crossover_point+crossover_l] = parent1[crossover_point:crossover_point+crossover_l]
+        offspring2['items'][crossover_point+crossover_l:] = parent2[crossover_point+crossover_l:]
+    else:
+        cycle_point = (crossover_point+crossover_l) % item_count()
+        offspring1['items'][0:cycle_point] = parent2[0:cycle_point]
+        offspring1['items'][cycle_point:crossover_point] = parent1[cycle_point:crossover_point]
+        offspring1['items'][crossover_point:] = parent2[crossover_point:]
+        offspring2['items'][0:cycle_point] = parent1[0:cycle_point]
+        offspring2['items'][cycle_point:crossover_point] = parent2[cycle_point:crossover_point]
+        offspring2['items'][crossover_point:] = parent1[crossover_point:]        
+    return [offspring1, offspring2]  
 
 def create_offspring():
     return {'height': 0, 'items': [0] * items_count() }
