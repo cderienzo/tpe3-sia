@@ -39,5 +39,6 @@ def three(GA, population):
     offspring = GA.mutation(offspring)
 
     new_pop = random.sample(population,len(population)-Config.num_parents_mating)
-
-    return new_pop.extend(random.sample(population.extend(offspring), Config.num_parents_mating))
+    population.extend(offspring)
+    new_pop.extend(random.sample(population, Config.num_parents_mating))
+    return new_pop
