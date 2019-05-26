@@ -63,9 +63,9 @@ class GeneticAlgorithm():
             fitness_vector.append(fitness)
         return fitness_vector
 
-    def select_mating_pool(self, population, fitness):
-        population_1 = Loader.select(1)(population, fitness)
-        population_2 = Loader.select(2)(population, fitness)
+    def select_mating_pool(self, population, fitness, GA):
+        population_1 = Loader.select(1)(population, fitness, GA)
+        population_2 = Loader.select(2)(population, fitness, GA)
 
         sample_1 = random.sample(population_1, Config.A)
         sample_2 = random.sample(population_2, 1 - Config.A)

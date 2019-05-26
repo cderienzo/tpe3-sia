@@ -1,11 +1,11 @@
 import numpy
 from Config import Config
 
-def elite(population, fitness):
-    population.sort()
+def elite(population, fitness, GA):
+    population.sort(key=lambda val: GA.fitness([val]))
     return population[len(population) - Config.num_parents_mating:]
 
-def roulette(population, fitness):
+def roulette(population, fitness, GA):
     accumulated_fitness = accum_fitness(fitness)
     parents = []
     roulette_values = numpy.random.uniform(low=0.0,high=1.0, size=Config.num_parents_mating)
@@ -18,7 +18,7 @@ def roulette(population, fitness):
                 parents.append(population[k])
     return parents
 
-def universal(population, fitness):
+def universal(population, fitness, GA):
     r = numpy.random.uniform(low=0.0,high=1.0)
     r_j = []
 
@@ -40,19 +40,19 @@ def universal(population, fitness):
 
     return selection
 
-def boltzmann(population, fitness):
+def boltzmann(population, fitness, GA):
     # TODO
     return None
 
-def tournaments1(population, fitness):
+def tournaments1(population, fitness, GA):
     # TODO
     return None
 
-def tournaments2(population, fitness):
+def tournaments2(population, fitness, GA):
     # TODO
     return None
 
-def ranking(population, fitness):
+def ranking(population, fitness, GA):
     # TODO
     return None
 
