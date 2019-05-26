@@ -6,27 +6,41 @@ def elite(population, fitness):
     return None
 
 def roulette(population, fitness):
-    # TODO redo con nueva estructura
-    # Selecting the best individuals in the current generation as parents for producing the offspring of the next generation.
     accumulated_fitness = accum_fitness(fitness)
-    parents = numpy.zeros((Config.num_parents_mating, population.shape[1]),numpy.int8)
+    parents = []
     roulette_values = numpy.random.uniform(low=0.0,high=1.0, size=Config.num_parents_mating)
-    p=0
+    
     for i in range(Config.num_parents_mating):
         for k in range(len(accumulated_fitness)):
             if k > 0 and accumulated_fitness[k] > roulette_values[i] and accumulated_fitness[k-1] < roulette_values[i]:
-                parents[p] = population[k]
-                p+=1
+                parents.append(population[k])
                 break
             elif accumulated_fitness[k] > roulette_values[i]:
-                parents[p] = population[k]
-                p+=1
+                parents.append(population[k])
                 break
     return parents
 
 def universal(population, fitness):
-    # TODO
-    return None
+    r = numpy.random.uniform(low=0.0,high=1.0)
+    r_j = []
+
+    for j in range(1,Config.num_parents_mating):
+        r_j.append((r+j-1)/Config.num_parents_mating)
+
+    accumulated_fitness = accum_fitness(fitness)
+
+    selection = []
+
+    for i in range(Config.num_parents_mating):
+        for k in range(len(accumulated_fitness)):
+            if k > 0 and accumulated_fitness[k] > r_j[i] and accumulated_fitness[k-1] < r_j[i]:
+                selection.append(population[k])
+                break
+            elif accumulated_fitness[k] > r_j[i]:
+                selection.append(population[k])
+                break
+
+    return selection
 
 def boltzmann(population, fitness):
     # TODO

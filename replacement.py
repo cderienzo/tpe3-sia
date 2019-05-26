@@ -1,6 +1,7 @@
-def one(GA, population):
-    fitness = GA.fitness(population)
+import numpy
+import Config
 
+def one(GA, population):
     offspring = []
 
     while(len(offspring)<len(population)):
