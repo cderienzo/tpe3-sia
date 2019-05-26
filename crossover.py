@@ -1,13 +1,13 @@
 import numpy
 from Config import Config
-from Loader import Loader
+from items import *
 from offspring import *
 
 def one_point(parent1, parent2):
     offspring1 = create_offspring()
     offspring2 = create_offspring()
 
-    crossover_point = numpy.random.randint(low=0, high=Loader.items_count())
+    crossover_point = numpy.random.randint(low=0, high=items_count())
     
     offspring1['height'] = parent1['height']
     offspring2['height'] = parent2['height']
@@ -24,8 +24,8 @@ def two_points(parent1, parent2):
     offspring1 = create_offspring()
     offspring2 = create_offspring()
 
-    crossover_point_1 = numpy.random.randint(low=0, high=Loader.items_count())
-    crossover_point_2 = numpy.random.randint(low=crossover_point_1, high=Loader.items_count())
+    crossover_point_1 = numpy.random.randint(low=0, high=items_count())
+    crossover_point_2 = numpy.random.randint(low=crossover_point_1, high=items_count())
 
     offspring1['height'] = parent1['height']
     offspring2['height'] = parent2['height']

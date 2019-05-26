@@ -28,9 +28,7 @@ class Loader:
                               'defense_multiplier': 0.3,
                               'options': [[0.8, 1.2, 1.1, 1, 0.8],
                                           [0.9, 1, 1.1, 1, 0.9],
-                                          [0.9, 0.9, 1, 1.1, 1]]}}
-
-    files = ['testdata/armas.tsv', 'testdata/botas.tsv', 'testdata/cascos.tsv', 'testdata/guantes.tsv', 'testdata/pecheras.tsv']                                      
+                                          [0.9, 0.9, 1, 1.1, 1]]}}                        
 
     attack_multiplier = characters[Config.character]['attack_multiplier']
     defense_multiplier = characters[Config.character]['defense_multiplier']
@@ -39,16 +37,6 @@ class Loader:
     skill_multiplier = characters[Config.character]['options'][Config.character_num][2]
     resistence_multiplier = characters[Config.character]['options'][Config.character_num][3]
     life_multiplier = characters[Config.character]['options'][Config.character_num][4]
-
-    def item_value(id, item_id):
-        return pandas.read_csv(Loader.files[item_id], names=['id', 'strength', 'agility', 'skill', 'resistence', 'life'], skiprows=id, nrows=1, delimiter='\t')
-
-    def item_count():
-        with open(Loader.files[0]) as item:
-            return sum(1 for line in item)
-
-    def items_count():
-        return len(Loader.files)        
 
     def replacement(number):
         switcher = {

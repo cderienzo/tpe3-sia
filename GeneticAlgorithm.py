@@ -2,6 +2,7 @@ import numpy
 import random
 from Config import Config
 from Loader import Loader
+from items import *
 
 class GeneticAlgorithm():
 
@@ -9,7 +10,7 @@ class GeneticAlgorithm():
     def seed(self):
         population = list()
         for individual in range(Config.population_size):
-            population.append({'height': random.uniform(Config.min_height, Config.max_height), 'items': numpy.random.randint(0, Loader.item_count(), Loader.items_count())})
+            population.append({'height': random.uniform(Config.min_height, Config.max_height), 'items': numpy.random.randint(0, item_count(), items_count())})
         return population
 
     def replacement(self, population):
@@ -25,11 +26,11 @@ class GeneticAlgorithm():
     # Calculating the fitness value of each solution in the current population.   
         fitness_vector = list()
         for individual in population:
-            arms = Loader.item_value(individual['items'][0], 0)
-            boots = Loader.item_value(individual['items'][1], 1)
-            helmets = Loader.item_value(individual['items'][2], 2)
-            gloves = Loader.item_value(individual['items'][3], 3)
-            vests = Loader.item_value(individual['items'][4], 4)
+            arms = item_value(individual['items'][0], 0)
+            boots = item_value(individual['items'][1], 1)
+            helmets = item_value(individual['items'][2], 2)
+            gloves = item_value(individual['items'][3], 3)
+            vests = item_value(individual['items'][4], 4)
             strength = arms[0] + boots[0] + helmets[0] + gloves[0] + vests[0]
             agility = arms[1] + boots[1] + helmets[1] + gloves[1] + vests[1]
             skill = arms[2] + boots[2] + helmets[2] + gloves[2] + vests[2]
