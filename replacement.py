@@ -5,7 +5,7 @@ def one(GA, population):
 
     while(len(offspring)<len(population)):
         parents = random.sample(population, 2)
-        offspring.append(GA.crossover(parents[0], parents[1]))
+        offspring.extend(GA.crossover(parents[0], parents[1]))
     
     offspring = GA.mutation(offspring)
     return offspring
@@ -18,11 +18,11 @@ def two(GA, population):
 
     while(len(offspring)<len(parents)):
         random_parents = random.sample(parents, 2)
-        offspring.append(GA.crossover(random_parents[0], random_parents[1]))
+        offspring.extend(GA.crossover(random_parents[0], random_parents[1]))
 
     offspring = GA.mutation(offspring)
 
-    offspring.append(random.sample(population,len(population)-Config.num_parents_mating))
+    offspring.extend(random.sample(population,len(population)-Config.num_parents_mating))
     return offspring    
 
 def three(GA, population):
@@ -33,7 +33,7 @@ def three(GA, population):
 
     while(len(offspring)<len(parents)):
         random_parents = random.sample(parents, 2)
-        offspring.append(GA.crossover(random_parents[0], random_parents[1]))
+        offspring.extend(GA.crossover(random_parents[0], random_parents[1]))
 
     offspring = GA.mutation(offspring)
 
