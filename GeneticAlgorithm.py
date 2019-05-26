@@ -66,7 +66,8 @@ class GeneticAlgorithm():
         sample_1 = random.sample(population_1, size_1)
         sample_2 = random.sample(population_2, size_2)
 
-        return sample_1.extend(sample_2)
+        sample_1.extend(sample_2)
+        return sample_1
 
     def crossover(self, parent1, parent2):
         return Loader.crossover()(parent1, parent2)

@@ -14,7 +14,6 @@ def one(GA, population):
 def two(GA, population):
     fitness = GA.fitness(population)
     parents = GA.select_mating_pool(population, fitness, GA)
-    print(type(parents))
 
     offspring = []
 
