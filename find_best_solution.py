@@ -57,3 +57,12 @@ while(not finished()):
 
     population = GA.replacement(population, fitness)
     generation += 1
+
+print("Generation : ", generation)
+print("-------------------------------------------------------------------------")
+fitness = GA.fitness(population)
+best_match_idx = numpy.where(fitness == numpy.max(fitness))
+index = best_match_idx[0][0]
+print("best solution : ", population[index])
+print("best solution fitness : ", fitness[index])
+print("-------------------------------------------------------------------------") 
