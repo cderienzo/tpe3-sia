@@ -17,7 +17,7 @@ class Config:
     # 1 = Cruce de un punto, 2 = Cruce de dos puntos, 3 = Cruce uniforme, 4 = Cruce anular
     crossover = 2
 
-    uniform_crossover_p = 0.5
+    uniform_crossover_p = 0.8
 
     # 1 = Gen, 2 = MultiGen
     mutation_geneticity = 2
@@ -25,7 +25,7 @@ class Config:
     # 1 = Uniforme, 2 = No Uniforme
     mutation_uniformity = 2
 
-    mutation_prob = 0.6
+    mutation_prob = 0.01
 
     #  1 = Elite, 2 = Ruleta, 3 = Universal, 4 = Boltzmann, 5 = Torneos1, 6 = Torneos2, 7 = Ranking
     A = 0.5
