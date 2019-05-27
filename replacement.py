@@ -13,7 +13,7 @@ def one(GA, population):
 
 def two(GA, population):
     fitness = GA.fitness(population)
-    parents = GA.select_mating_pool(population, fitness, GA)
+    parents = GA.select_mating_pool(population, fitness)
 
     offspring = []
 
@@ -28,7 +28,7 @@ def two(GA, population):
 
 def three(GA, population):
     fitness = GA.fitness(population)
-    parents = GA.select_mating_pool(population, fitness, GA)
+    parents = GA.select_mating_pool(population, fitness)
 
     offspring = []
 
