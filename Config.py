@@ -33,13 +33,13 @@ class Config:
     selection_method_1 = 1
     selection_method_2 = 2
     selection_method_3 = 3
-    selection_method_4 = 5
+    selection_method_4 = 2
 
     # Rounds for tournament selection method
     tournament_rounds = 3
 
     # 1 = Metodo1, 2 = Metodo2, 3 = Metodo3
-    replacement_method = 1
+    replacement_method = 2
 
     # 1 = Maxima cantidad de generaciones, 2 = Estructura,  3 = Contenido, 4 = Entorno a un optimo
     finish_criteria = 4
