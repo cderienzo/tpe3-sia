@@ -69,7 +69,6 @@ class Loader:
         3: uniform,
         4: anular
         }
-        # Get the function from switcher dictionary
         return switcher.get(Config.crossover)
 
     def mutation():
@@ -77,5 +76,4 @@ class Loader:
         1: gene,
         2: multigene
         }
-        # Get the function from switcher dictionary
         return switcher.get(Config.mutation_geneticity) 

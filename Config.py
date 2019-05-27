@@ -40,5 +40,14 @@ class Config:
     replacement_method_1 = 1
     replacement_method_2 = 2
 
-    # 1 = Maxima cantidad de generaciones, 2 = Estructura,  3 = Contenido, 4 = Entorno a un  optimo
-    finish_criteria = 1
+    # 1 = Maxima cantidad de generaciones, 2 = Estructura,  3 = Contenido, 4 = Entorno a un optimo
+    finish_criteria = 4
+
+    # Maximas generaciones consecutivas sin mejorar el fitness para el criterio de corte de contenido. 
+    # TODO que valor deberia ir?
+    max_consecutive_generations = 20
+
+    # Para la condicion de corte de entorno a un optimo donde se llega a un fitness inferior a un delta.
+    # TODO que valores deberian ir?
+    optimal_fitness = 4
+    delta = 0.001
