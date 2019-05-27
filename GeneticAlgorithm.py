@@ -36,11 +36,11 @@ class GeneticAlgorithm():
             gloves = item_value(individual['items'][3], 3)
             vests = item_value(individual['items'][4], 4)
                 
-            strength = arms['strength'][0] + boots['strength'][0] + helmets['strength'][0] + gloves['strength'][0] + vests['strength'][0]
-            agility = arms['agility'][0] + boots['agility'][0] + helmets['agility'][0] + gloves['agility'][0] + vests['agility'][0]
-            skill = arms['skill'][0] + boots['skill'][0] + helmets['skill'][0] + gloves['skill'][0] + vests['skill'][0]
-            resistence = arms['resistence'][0] + boots['resistence'][0] + helmets['resistence'][0] + gloves['resistence'][0] + vests['resistence'][0]
-            life = arms['life'][0] + boots['life'][0] + helmets['life'][0] + gloves['life'][0] + vests['life'][0]
+            strength = arms['Fu'] + boots['Fu'] + helmets['Fu'] + gloves['Fu'] + vests['Fu']
+            agility = arms['Ag'] + boots['Ag'] + helmets['Ag'] + gloves['Ag'] + vests['Ag']
+            skill = arms['Ex'] + boots['Ex'] + helmets['Ex'] + gloves['Ex'] + vests['Ex']
+            resistence = arms['Re'] + boots['Re'] + helmets['Re'] + gloves['Re'] + vests['Re']
+            life = arms['Vi'] + boots['Vi'] + helmets['Vi'] + gloves['Vi'] + vests['Vi']
 
             strength = 100 * numpy.tanh(0.01 * Loader.strength_multiplier * strength)
             agility = numpy.tanh(0.01 * Loader.agility_multiplier * agility)

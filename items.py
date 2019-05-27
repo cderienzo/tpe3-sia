@@ -1,10 +1,12 @@
 import pandas
 
-files = ['testdata/armas.tsv', 'testdata/botas.tsv', 'testdata/cascos.tsv', 'testdata/guantes.tsv', 'testdata/pecheras.tsv']                 
+files = ['fulldata/armas.tsv', 'fulldata/botas.tsv', 'fulldata/cascos.tsv', 'fulldata/guantes.tsv', 'fulldata/pecheras.tsv']                 
 item_count_global = 0
 
+data = [pandas.read_csv(x, sep='\t', header=0) for x in files]
+
 def item_value(id, item_id):
-    return pandas.read_csv(files[item_id], names=['id', 'strength', 'agility', 'skill', 'resistence', 'life'], skiprows=id+1, nrows=1, delimiter='\t')
+    return data[item_id].iloc[id]
 
 def items_count():
     return len(files)        
