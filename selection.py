@@ -1,11 +1,12 @@
 import numpy
+import random
 from Config import Config
 
-def elite(population, fitness, GA):
+def elite(population, fitness, GA, size):
     population.sort(key=lambda val: GA.fitness([val]))
-    return population[len(population) - Config.num_parents_mating:]
+    return random.sample(population[len(population) - Config.num_parents_mating:], size)
 
-def roulette(population, fitness, GA):
+def roulette(population, fitness, GA, size):
     accumulated_fitness = accum_fitness(fitness)
     parents = []
     roulette_values = numpy.random.uniform(low=0.0,high=1.0, size=Config.num_parents_mating)
@@ -17,9 +18,9 @@ def roulette(population, fitness, GA):
             elif k==0 and accumulated_fitness[k] > roulette_values[i]:
                 parents.append(population[k])
 
-    return parents
+    return random.sample(parents, size)
 
-def universal(population, fitness, GA):
+def universal(population, fitness, GA, size):
     r = numpy.random.uniform(low=0.0,high=1.0)
     r_j = []
 
@@ -39,13 +40,13 @@ def universal(population, fitness, GA):
                 selection.append(population[k])
                 break
 
-    return selection
+    return random.sample(selection, size)
 
-def boltzmann(population, fitness, GA):
+def boltzmann(population, fitness, GA, size):
     # TODO
     return None
 
-def tournaments1(population, fitness, GA):
+def tournaments1(population, fitness, GA, size):
     selection = []
     for i in range(Config.tournament_rounds):
         participants = numpy.random.randint(low=0, high=len(population), size=Config.num_parents_mating)
@@ -57,9 +58,9 @@ def tournaments1(population, fitness, GA):
                 index = participants[p]
             selection.append(population[index])
 
-    return selection
+    return random.sample(selection, size)
 
-def tournaments2(population, fitness, GA):
+def tournaments2(population, fitness, GA, size):
     selection = []
     for i in range(Config.num_parents_mating):
         participants = numpy.random.randint(low=0, high = len(population), size= 2)
@@ -74,9 +75,9 @@ def tournaments2(population, fitness, GA):
             else:
                 selection.append(population[participants[1]])
 
-    return selection
+    return random.sample(selection, size)
 
-def ranking(population, fitness, GA):
+def ranking(population, fitness, GA, size):
     # TODO
     return None
 
