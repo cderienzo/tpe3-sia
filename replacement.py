@@ -5,9 +5,11 @@ def one(GA, population, fitness):
     offspring = []
 
     #todo restarselo a pop asi no se repite
-    while(len(offspring)<len(population)):
+    while(len(population)!=0):
         parents = random.sample(population, 2)
         offspring.extend(GA.crossover(parents[0], parents[1]))
+        population.remove(parents[0])
+        population.remove(parents[1])
     
     offspring = GA.mutation(offspring)
     return offspring
@@ -20,9 +22,11 @@ def two(GA, population, fitness):
     offspring = []
 
     # TODO restarselo a pop asi no se repite
-    while(len(offspring)<len(parents)):
-        random_parents = random.sample(parents, 2)
-        offspring.extend(GA.crossover(random_parents[0], random_parents[1]))
+    while(len(parents)!=0):
+        parents = random.sample(parents, 2)
+        offspring.extend(GA.crossover(parents[0], parents[1]))
+        population.remove(parents[0])
+        population.remove(parents[1])
 
     offspring = GA.mutation(offspring)
 
@@ -36,10 +40,11 @@ def three(GA, population, fitness):
 
     offspring = []
 
-    # TODO restarselo a pop asi no se repite
-    while(len(offspring)<len(parents)):
-        random_parents = random.sample(parents, 2)
-        offspring.extend(GA.crossover(random_parents[0], random_parents[1]))
+    while(len(parents!=0)):
+        parents = random.sample(parents, 2)
+        offspring.extend(GA.crossover(parents[0], parents[1]))
+        population.remove(parents[0])
+        population.remove(parents[1])
 
     offspring = GA.mutation(offspring)
 
