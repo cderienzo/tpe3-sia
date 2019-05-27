@@ -29,16 +29,17 @@ class Config:
 
     #  1 = Elite, 2 = Ruleta, 3 = Universal, 4 = Boltzmann, 5 = Torneos1, 6 = Torneos2, 7 = Ranking
     A = 0.5
-    selection_method_1 = 2
-    selection_method_2 = 3
+    B = 0.5
+    selection_method_1 = 1
+    selection_method_2 = 2
+    selection_method_3 = 3
+    selection_method_4 = 5
 
     # Rounds for tournament selection method
     tournament_rounds = 3
 
     # 1 = Metodo1, 2 = Metodo2, 3 = Metodo3
-    B = 0.5
-    replacement_method_1 = 1
-    replacement_method_2 = 2
+    replacement_method = 1
 
     # 1 = Maxima cantidad de generaciones, 2 = Estructura,  3 = Contenido, 4 = Entorno a un optimo
     finish_criteria = 4

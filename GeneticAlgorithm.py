@@ -13,18 +13,8 @@ class GeneticAlgorithm():
             population.append({'height': random.uniform(Config.min_height, Config.max_height), 'items': list(numpy.random.randint(0, item_count(), items_count()))})
         return population
 
-    def replacement(self, population):
-        population_1 = Loader.replacement(1)(self, population)
-        population_2 = Loader.replacement(2)(self, population)
-
-        size_1 = int(Config.B * len(population_1))
-        size_2 = int((1 - Config.B) * len(population_1))
-
-        sample_1 = random.sample(population_1, size_1)
-        sample_2 = random.sample(population_2, size_2)
-
-        sample_1.extend(sample_2)
-        return sample_1
+    def replacement(self, population, fitness):
+        return Loader.replacement()(self, population, fitness)
 
     def fitness(self, population):
     # Calculating the fitness value of each solution in the current population.   
@@ -57,18 +47,22 @@ class GeneticAlgorithm():
             fitness_vector.append(fitness)
         return fitness_vector
 
-    def select_mating_pool(self, population, fitness):
-        population_1 = Loader.select(1)(population, fitness, self)
-        population_2 = Loader.select(2)(population, fitness, self)
+    def select_mating_pool(self, population, fitness, selection_pair, size):
+        first, second = 3, 4
+        factor = Config.B
+        
+        if(selection_pair == 'A'):
+            first, second = 1, 2
+            factor = Config.A 
+    
+        size_1 = int(factor * size)
+        size_2 = size - size_1
 
-        size_1 = int(Config.A * len(population_1))
-        size_2 = int((1 - Config.A) * len(population_1))
+        population_1 = Loader.select(first)(population, fitness, self, size_1)
+        population_2 = Loader.select(second)(population, fitness, self, size_2)
 
-        sample_1 = random.sample(population_1, size_1)
-        sample_2 = random.sample(population_2, size_2)
-
-        sample_1.extend(sample_2)
-        return sample_1
+        population_1.extend(population_2)
+        return population_1
 
     def crossover(self, parent1, parent2):
         return Loader.crossover()(parent1, parent2)

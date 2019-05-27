@@ -55,5 +55,5 @@ while(not finished()):
     print("best solution fitness : ", fitness[index])
     print("-------------------------------------------------------------------------") 
 
-    population = GA.replacement(population)
+    population = GA.replacement(population, fitness)
     generation += 1

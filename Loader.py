@@ -38,15 +38,13 @@ class Loader:
     resistence_multiplier = characters[Config.character]['options'][Config.character_num][3]
     life_multiplier = characters[Config.character]['options'][Config.character_num][4]
 
-    def replacement(number):
+    def replacement():
         switcher = {
         1: one,
         2: two,
         3: three
         }    
-        if (number == 1):
-            return switcher.get(Config.replacement_method_1)
-        return switcher.get(Config.replacement_method_2)           
+        return switcher.get(Config.replacement_method)           
     
     def select(number):
         switcher = {
@@ -60,7 +58,12 @@ class Loader:
         }
         if (number == 1):
             return switcher.get(Config.selection_method_1)
-        return switcher.get(Config.selection_method_2)    
+        elif (number == 2):
+            return switcher.get(Config.selection_method_2)
+        elif (number == 3):
+            return switcher.get(Config.selection_method_3)
+        else:
+            return switcher.get(Config.selection_method_4)
 
     def crossover():
         switcher = {
