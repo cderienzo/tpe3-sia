@@ -24,7 +24,7 @@ class Config:
 
     # 1 = Uniforme, 2 = No Uniforme
     mutation_uniformity = 2
-
+    delta_mutation_prob = 0.0001
     mutation_prob = 0.01
 
     #  1 = Elite, 2 = Ruleta, 3 = Universal, 4 = Boltzmann, 5 = Torneos1, 6 = Torneos2, 7 = Ranking

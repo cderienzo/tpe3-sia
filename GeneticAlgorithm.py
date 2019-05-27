@@ -68,8 +68,7 @@ class GeneticAlgorithm():
         return Loader.crossover()(parent1, parent2)
 
     def mutation(self, offspring):
-        # TODO revisar que cambia random
         if (Config.mutation_uniformity == 2):
-            Config.mutation_prob = random.uniform(0, 1)
+            Config.mutation_prob -= Config.delta_mutation_prob
         return Loader.mutation()(offspring)
 
