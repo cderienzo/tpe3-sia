@@ -67,20 +67,20 @@ def anular(parent1, parent2):
     offspring2['height'] = parent2['height']
     
     if crossover_point + crossover_l < items_count():
-        offspring1['items'][0:crossover_point] = parent1[0:crossover_point]
-        offspring1['items'][crossover_point:crossover_point+crossover_l] = parent2[crossover_point:crossover_point+crossover_l]
-        offspring1['items'][crossover_point+crossover_l:] = parent1[crossover_point+crossover_l:]
-        offspring2['items'][0:crossover_point] = parent2[0:crossover_point]
-        offspring2['items'][crossover_point:crossover_point+crossover_l] = parent1[crossover_point:crossover_point+crossover_l]
-        offspring2['items'][crossover_point+crossover_l:] = parent2[crossover_point+crossover_l:]
+        offspring1['items'][0:crossover_point] = parent1['items'][0:crossover_point]
+        offspring1['items'][crossover_point:crossover_point+crossover_l] = parent2['items'][crossover_point:crossover_point+crossover_l]
+        offspring1['items'][crossover_point+crossover_l:] = parent1['items'][crossover_point+crossover_l:]
+        offspring2['items'][0:crossover_point] = parent2['items'][0:crossover_point]
+        offspring2['items'][crossover_point:crossover_point+crossover_l] = parent1['items'][crossover_point:crossover_point+crossover_l]
+        offspring2['items'][crossover_point+crossover_l:] = parent2['items'][crossover_point+crossover_l:]
     else:
         cycle_point = (crossover_point+crossover_l) % item_count()
-        offspring1['items'][0:cycle_point] = parent2[0:cycle_point]
-        offspring1['items'][cycle_point:crossover_point] = parent1[cycle_point:crossover_point]
-        offspring1['items'][crossover_point:] = parent2[crossover_point:]
-        offspring2['items'][0:cycle_point] = parent1[0:cycle_point]
-        offspring2['items'][cycle_point:crossover_point] = parent2[cycle_point:crossover_point]
-        offspring2['items'][crossover_point:] = parent1[crossover_point:]        
+        offspring1['items'][0:cycle_point] = parent2['items'][0:cycle_point]
+        offspring1['items'][cycle_point:crossover_point] = parent1['items'][cycle_point:crossover_point]
+        offspring1['items'][crossover_point:] = parent2['items'][crossover_point:]
+        offspring2['items'][0:cycle_point] = parent1['items'][0:cycle_point]
+        offspring2['items'][cycle_point:crossover_point] = parent2['items'][cycle_point:crossover_point]
+        offspring2['items'][crossover_point:] = parent1['items'][crossover_point:]        
     return [offspring1, offspring2]  
 
 def create_offspring():
