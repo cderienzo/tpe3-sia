@@ -46,18 +46,16 @@ best_fitness_current = -1
 consecutive_generations = 0
 
 while(not finished()):
-    print("Generation : ", generation)
-    print("-------------------------------------------------------------------------")
     fitness = GA.fitness(population)
     best_match_idx = numpy.where(fitness == numpy.max(fitness))
     index = best_match_idx[0][0]
-    print("best solution : ", population[index])
-    print("best solution fitness : ", fitness[index])
-    print("-------------------------------------------------------------------------") 
+    #print("best solution : ", population[index])
+    print("gen: ",generation,"  fitness: ",fitness[index],"  height: ",population[index]['height'],"  items: ",population[index]['items'])
 
     population = GA.replacement(population, fitness)
     generation += 1
 
+print("-------------------------------------------------------------------------")
 print("Generation : ", generation)
 print("-------------------------------------------------------------------------")
 fitness = GA.fitness(population)
