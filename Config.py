@@ -38,6 +38,11 @@ class Config:
     # Initial and final temperatures for boltzmann
     initial_temperature = 373
     final_temperature = 273
+
+    # 1 = Exponential Multiplicative, 2 = Logarithmical Multiplicative, 3 = Linear Multiplicative, 4 = Linear Additive
+    cooling_schedule = 4
+    # For schedule 1: alpha between 0.8 and 0.9, for schedule 2: alpha > 1, for schedule 3: alpha > 0 
+    cooling_alpha = 1.5
     # Rounds for tournament selection method
     tournament_rounds = 3
 
