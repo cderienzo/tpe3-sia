@@ -1,6 +1,7 @@
 import numpy
 import random
 from Config import Config
+from State import State
 
 def elite(population, fitness, GA, size):
     population.sort(key=lambda val: GA.fitness([val]))
@@ -43,8 +44,24 @@ def universal(population, fitness, GA, size):
     return random.sample(selection, size)
 
 def boltzmann(population, fitness, GA, size):
-    # TODO
-    return None
+    boltzmann_fitness = []
+    schedule_id = Config.cooling_schedule
+    if schedule_id == 1:
+        temp_i = Config.initial_temperature* numpy.exp(Config.cooling_alpha, State.generation)
+    elif schedule_id == 2:
+        temp_i = Config.initial_temperature / (1 + (Config.cooling_alpha*numpy.log(State.generation+1)))
+    elif schedule_id == 3:
+        temp_i = Config.initial_temperature / ( 1 + Config.cooling_alpha*State.generation)
+    elif schedule_id == 4:
+        temp_i = Config.final_temperature + (Config.initial_temperature - Config.final_temperature)*((Config.num_generations - State.generation)/Config.num_generations)
+    else:
+        temp_i = Config.initial_temperature - State.generation * (Config.initial_temperature - Config.final_temperature)/Config.num_generations
+
+    nom = numpy.exp(numpy.divide(fitness,temp_i))
+    den = numpy.sum(nom)/len(fitness)
+    boltzmann_fitness = nom/den
+
+    return roulette(population, boltzmann_fitness, GA, size)
 
 def tournaments1(population, fitness, GA, size):
     selection = []

@@ -1,6 +1,7 @@
 import numpy
 from GeneticAlgorithm import GeneticAlgorithm
 from Config import Config
+from State import State
 
 def finished():
     switcher = {
@@ -12,38 +13,32 @@ def finished():
     return switcher.get(Config.finish_criteria)()
 
 def max_generations_finished():
-    return generation >= Config.num_generations
+    return State.generation >= Config.num_generations
 
 def structure_finished():
     # TODO
     return False
 
 def content_finished():
-    global best_fitness_current
-    global consecutive_generations
-    
-    if generation == 0:
+
+    if State.generation == 0:
         return False
-    if (fitness[index] > best_fitness_current):
-        best_fitness_current = fitness[index]
-        consecutive_generations = 0
+    if (fitness[index] > State.best_fitness_current):
+        State.best_fitness_current = fitness[index]
+        State.consecutive_generations = 0
         return False
     else:
-        consecutive_generations += 1
-        return consecutive_generations >= Config.max_consecutive_generations     
+        State.consecutive_generations += 1
+        return State.consecutive_generations >= Config.max_consecutive_generations     
 
 def near_optimal_finished():
-    if generation == 0:
+    if State.generation == 0:
         return False
     return abs(Config.optimal_fitness - fitness[index]) < Config.delta 
 
 GA = GeneticAlgorithm()
 
 population = GA.seed()
-
-generation = 0
-best_fitness_current = -1
-consecutive_generations = 0
 
 while(not finished()):
     fitness = GA.fitness(population)
@@ -53,7 +48,7 @@ while(not finished()):
     print("gen: ",generation,"  fitness: ",fitness[index],"  height: ",population[index]['height'],"  items: ",population[index]['items'])
 
     population = GA.replacement(population, fitness)
-    generation += 1
+    State.generation += 1
 
 print("-------------------------------------------------------------------------")
 print("Generation : ", generation)
