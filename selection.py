@@ -1,6 +1,7 @@
 import numpy
 import random
 from Config import Config
+from find_best_solution import generation
 
 def elite(population, fitness, GA, size):
     population.sort(key=lambda val: GA.fitness([val]))
@@ -43,8 +44,15 @@ def universal(population, fitness, GA, size):
     return random.sample(selection, size)
 
 def boltzmann(population, fitness, GA, size):
-    # TODO
-    return None
+    global generation
+    boltzmann_fitness = []
+    temp_i = Config.initial_temperature - generation * (Config.initial_temperature - Config.final_temperature)/Config.num_generations
+    for i in len(fitness):
+        norm += numpy.exp(numpy.divide(fitness,Config.initial_temperature))
+    norm = norm/len(fitness)
+    for i in len(fitness):
+        boltzmann_fitness.append(numpy.exp(numpy.divide(fitness,Config.initial_temperature))/norm)
+    return roulette(population, boltzmann_fitness, GA, size)
 
 def tournaments1(population, fitness, GA, size):
     selection = []
