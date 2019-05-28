@@ -41,8 +41,8 @@ class GeneticAlgorithm():
             atm = 0.5 - pow((3 * individual['height'] - 5), 4) + pow((3 * individual['height'] - 5), 2) + individual['height']/2
             dem = 2 + pow((3 * individual['height'] - 5), 4)- pow((3 * individual['height'] - 5), 2) - individual['height']/2
 
-            attack = (agility * skill) * strength * atm
-            defense = (resistence * skill) * life * dem
+            attack = (agility + skill) * strength * atm
+            defense = (resistence + skill) * life * dem
             fitness = Loader.attack_multiplier * attack + Loader.defense_multiplier * defense
             fitness_vector.append(fitness)
         return fitness_vector
