@@ -10,7 +10,8 @@ def finished():
         3: content_finished,
         4: near_optimal_finished
     }
-    return switcher.get(Config.finish_criteria)()
+    return Config.max_generations # TODO
+
 
 def max_generations_finished():
     return State.generation >= Config.num_generations

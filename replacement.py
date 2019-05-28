@@ -16,7 +16,7 @@ def one(GA, population, fitness):
     return offspring
 
 def two(GA, population, fitness):
-    parents = GA.select_mating_pool(population, fitness, 'A', GA,Config.num_parents_mating)
+    parents = GA.select_pool(population, fitness, 'A', GA,Config.k)
 
     offspring = []
 
@@ -29,11 +29,11 @@ def two(GA, population, fitness):
 
     offspring = GA.mutation(offspring)
 
-    offspring.extend(GA.select_mating_pool(population, fitness, 'B', GA, len(population)-Config.num_parents_mating))
+    offspring.extend(GA.select_pool(population, fitness, 'B', GA, len(population)-Config.k))
     return offspring    
 
 def three(GA, population, fitness):
-    parents = GA.select_mating_pool(population, fitness, 'A', GA, Config.num_parents_mating)
+    parents = GA.select_pool(population, fitness, 'A', GA, Config.k)
 
     offspring = []
 
@@ -45,8 +45,8 @@ def three(GA, population, fitness):
         del parents[r2-1]
 
     offspring = GA.mutation(offspring)
-    new_pop = GA.select_mating_pool(population, fitness, 'B', GA, len(population)-Config.num_parents_mating)
+    new_pop = GA.select_pool(population, fitness, 'B', GA, len(population)-Config.k)
 
     population.extend(offspring)
-    new_pop.extend(GA.select_mating_pool(population, fitness, 'B', GA, Config.num_parents_mating))
+    new_pop.extend(GA.select_pool(population, fitness, 'B', GA, Config.k))
     return new_pop

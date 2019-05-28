@@ -9,7 +9,7 @@ class GeneticAlgorithm():
     # Create an initial seed population
     def seed(self):
         population = list()
-        for individual in range(Config.population_size):
+        for individual in range(Config.N):
             population.append({'height': random.uniform(Config.min_height, Config.max_height), 'items': list(numpy.random.randint(0, item_count(), items_count()))})
         return population
 
@@ -47,7 +47,7 @@ class GeneticAlgorithm():
             fitness_vector.append(fitness)
         return fitness_vector
 
-    def select_mating_pool(self, population, fitness, selection_pair, GA, size):
+    def select_pool(self, population, fitness, selection_pair, GA, size):
         first, second = 3, 4
         factor = Config.B
         
@@ -69,6 +69,6 @@ class GeneticAlgorithm():
 
     def mutation(self, offspring):
         if (Config.mutation_uniformity == 2):
-            Config.mutation_prob -= Config.delta_mutation_prob
+            Config.p_m -= Config.delta_mutation_prob
         return Loader.mutation()(offspring)
 

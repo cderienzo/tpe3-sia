@@ -5,14 +5,14 @@ from State import State
 
 def elite(population, fitness, GA, size):
     population.sort(key=lambda val: GA.fitness([val]))
-    return random.sample(population[len(population) - Config.num_parents_mating:], size)
+    return random.sample(population[len(population) - Config.k:], size)
 
 def roulette(population, fitness, GA, size):
     accumulated_fitness = accum_fitness(fitness)
     parents = []
-    roulette_values = numpy.random.uniform(low=0.0,high=1.0, size=Config.num_parents_mating)
+    roulette_values = numpy.random.uniform(low=0.0,high=1.0, size=Config.k)
     
-    for i in range(Config.num_parents_mating):
+    for i in range(Config.k):
         for k in range(len(accumulated_fitness)):
             if k > 0 and accumulated_fitness[k] > roulette_values[i] and accumulated_fitness[k-1] < roulette_values[i]:
                 parents.append(population[k])
@@ -25,14 +25,14 @@ def universal(population, fitness, GA, size):
     r = numpy.random.uniform(low=0.0,high=1.0)
     r_j = []
 
-    for j in range(1, Config.num_parents_mating + 1):
-        r_j.append((r+j-1)/Config.num_parents_mating)
+    for j in range(1, Config.k + 1):
+        r_j.append((r+j-1)/Config.k)
 
     accumulated_fitness = accum_fitness(fitness)
 
     selection = []
 
-    for i in range(Config.num_parents_mating):
+    for i in range(Config.k):
         for k in range(len(accumulated_fitness)):
             if k > 0 and accumulated_fitness[k] > r_j[i] and accumulated_fitness[k-1] < r_j[i]:
                 selection.append(population[k])
@@ -63,12 +63,12 @@ def boltzmann(population, fitness, GA, size):
 
     return roulette(population, boltzmann_fitness, GA, size)
 
-def tournaments1(population, fitness, GA, size):
+def deterministic_tournaments(population, fitness, GA, size):
     selection = []
     for i in range(Config.tournament_rounds):
-        participants = numpy.random.randint(low=0, high=len(population), size=Config.num_parents_mating)
+        participants = numpy.random.randint(low=0, high=len(population), size=Config.k)
         index = -1
-        for p in range(Config.num_parents_mating):
+        for p in range(Config.k):
             if index == -1:
                 index = participants[0]
             elif fitness[index] < fitness[(participants[p])]:
@@ -77,9 +77,9 @@ def tournaments1(population, fitness, GA, size):
 
     return random.sample(selection, size)
 
-def tournaments2(population, fitness, GA, size):
+def probabilistic_tournaments(population, fitness, GA, size):
     selection = []
-    for i in range(Config.num_parents_mating):
+    for i in range(Config.k):
         participants = numpy.random.randint(low=0, high = len(population), size= 2)
         if numpy.random.random_sample() < 0.75:
             if fitness[participants[0]] < fitness[participants[1]]:

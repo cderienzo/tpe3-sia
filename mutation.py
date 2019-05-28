@@ -4,7 +4,7 @@ from items import *
 
 def gene(offspring_crossover):
     for offspring in offspring_crossover:
-        if(numpy.random.random_sample() < Config.mutation_prob):
+        if(numpy.random.random_sample() < Config.p_m):
             random_value = numpy.random.randint(0, items_count()+1)
             if(random_value == items_count()):
                 mutation_value = numpy.random.uniform(Config.min_height, Config.max_height)
@@ -17,9 +17,9 @@ def gene(offspring_crossover):
 def multigene(offspring_crossover):
     for offspring in offspring_crossover:
         for gene in offspring['items']:
-            if(numpy.random.random_sample() < Config.mutation_prob):                
+            if(numpy.random.random_sample() < Config.p_m):                
                 mutation_value = numpy.random.random_integers(0, items_count())
                 gene = mutation_value
-        if(numpy.random.random_sample() < Config.mutation_prob):
+        if(numpy.random.random_sample() < Config.p_m):
             offspring['height'] = numpy.random.uniform(Config.min_height, Config.max_height)
     return offspring_crossover

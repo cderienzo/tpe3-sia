@@ -52,8 +52,8 @@ class Loader:
         2: roulette,
         3: universal,
         4: boltzmann,
-        5: tournaments1,
-        6: tournaments2,
+        5: deterministic_tournaments,
+        6: probabilistic_tournaments,
         7: ranking
         }
         if (number == 1):

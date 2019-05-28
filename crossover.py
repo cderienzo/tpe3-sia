@@ -46,14 +46,14 @@ def uniform(parent1, parent2):
 
     rand_height = numpy.random.rand()
 
-    offspring1['height'] = parent1['height'] if rand_height >= Config.uniform_crossover_p else parent2['height']
-    offspring2['height'] = parent2['height'] if rand_height >= Config.uniform_crossover_p else parent1['height']
+    offspring1['height'] = parent1['height'] if rand_height >= Config.p_c else parent2['height']
+    offspring2['height'] = parent2['height'] if rand_height >= Config.p_c else parent1['height']
 
     for i in range(0, items_count()):
         p = numpy.random.rand()
         
-        offspring1['items'][i] = parent1['items'][i] if(p>=Config.uniform_crossover_p) else parent2['items'][i]
-        offspring2['items'][i] = parent2['items'][i] if(p>=Config.uniform_crossover_p) else parent1['items'][i]
+        offspring1['items'][i] = parent1['items'][i] if(p>=Config.p_c) else parent2['items'][i]
+        offspring2['items'][i] = parent2['items'][i] if(p>=Config.p_c) else parent1['items'][i]
     return [offspring1, offspring2]
 
 def anular(parent1, parent2):
