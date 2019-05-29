@@ -52,6 +52,23 @@ def near_optimal_finished():
         return False
     return abs(Config.optimal_fitness - fitness[index]) < Config.delta 
 
+def kicking_finished():
+    if State.last_population is None:
+        State.last_population = population
+        return False
+    
+    changed = [individual for individual in population if individual not in State.last_population]
+    State.last_population = population
+    if (len(changed) > Config.irrelevant_percentage * len(population)):
+        return False
+    
+
+    distance = Config.optimal_fitness - fitness[index]
+    if  distance > Config.delta:         
+        Config.p_m += Config.p_m*0.5*numpy.tanh(distance)
+        return False
+
+    return True
 GA = GeneticAlgorithm()
 
 population = GA.seed()
