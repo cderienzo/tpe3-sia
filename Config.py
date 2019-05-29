@@ -17,9 +17,9 @@ class Config:
     #### POBLACION ####
     ###################
 
-    N = 100
+    N = 150
 
-    k = 70
+    k = 120
 
     ###############
     #### CRUZA ####
@@ -35,26 +35,26 @@ class Config:
     ##################
 
     # 1 = Gen, 2 = MultiGen
-    mutation_geneticity = 2
+    mutation_geneticity = 1
 
     # 1 = Uniforme, 2 = No Uniforme
-    mutation_uniformity = 2
+    mutation_uniformity = 1
 
     delta_mutation_prob = 0.0001
-    p_m = 0.01
+    p_m = 0.7
 
     ###################
     #### SELECCION ####
     ###################
 
     #  1 = Elite, 2 = Ruleta, 3 = Universal, 4 = Boltzmann, 5 = Torneos Deterministica, 6 = Torneos Probabilistica, 7 = Ranking
-    selection_method_1 = 4
-    selection_method_2 = 2
-    selection_method_3 = 4
-    selection_method_4 = 2
+    selection_method_1 = 3
+    selection_method_2 = 5
+    selection_method_3 = 3
+    selection_method_4 = 5
 
-    A = 1
-    B = 1
+    A = 0.8
+    B = 0.8
 
     # Boltzmann: Temperaturas inicial y final
     initial_temperature = 373
@@ -84,7 +84,7 @@ class Config:
     max_generations = False
     structure = False
     content = False
-    near_optimal = False
+    near_optimal = True
     
     ###################################################
     #### CONFIGURACION PARA LOS CRITERIOS DE CORTE ####
@@ -92,10 +92,10 @@ class Config:
 
     # Maximas generaciones consecutivas sin mejorar el fitness para el criterio de corte de contenido 
     # TODO que valor deberia ir?
-    max_consecutive_generations = 20
+    max_consecutive_generations = 100
 
     num_generations = 20
 
     # Para la condicion de corte de entorno a un optimo donde se llega a un fitness inferior a un delta.
     optimal_fitness = 41.05775193
-    delta = 9
+    delta = 2

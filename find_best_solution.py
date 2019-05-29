@@ -4,14 +4,16 @@ from Config import Config
 from State import State
 
 def finished():
-    switcher = {
-        1: max_generations_finished,
-        2: structure_finished,
-        3: content_finished,
-        4: near_optimal_finished
-    }
-    return Config.max_generations # TODO
-
+    finish = False
+    if (Config.max_generations):
+        finish = finish or max_generations_finished()
+    if not finish and (Config.structure):
+        finish = finish or structure_finished()
+    if not finish and (Config.content):
+        finish = finish or content_finished()
+    if not finish and (Config.near_optimal):
+        finish = finish or near_optimal_finished()
+    return finish        
 
 def max_generations_finished():
     return State.generation >= Config.num_generations
