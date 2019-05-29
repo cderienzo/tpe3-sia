@@ -49,12 +49,12 @@ class Config:
 
     #  1 = Elite, 2 = Ruleta, 3 = Universal, 4 = Boltzmann, 5 = Torneos Deterministica, 6 = Torneos Probabilistica, 7 = Ranking
     selection_method_1 = 1
-    selection_method_2 = 1
+    selection_method_2 = 4
     selection_method_3 = 1
-    selection_method_4 = 1
+    selection_method_4 = 6
 
     A = 0.6
-    B = 0.55
+    B = 0.45
 
     # Boltzmann: Temperaturas inicial y final
     initial_temperature = 18000
