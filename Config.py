@@ -41,17 +41,17 @@ class Config:
     mutation_uniformity = 1
 
     delta_mutation_prob = 0.0001
-    p_m = 0.3
+    p_m = 0.1
 
     ###################
     #### SELECCION ####
     ###################
 
     #  1 = Elite, 2 = Ruleta, 3 = Universal, 4 = Boltzmann, 5 = Torneos Deterministica, 6 = Torneos Probabilistica, 7 = Ranking
-    selection_method_1 = 3
-    selection_method_2 = 5
-    selection_method_3 = 3
-    selection_method_4 = 5
+    selection_method_1 = 1
+    selection_method_2 = 1
+    selection_method_3 = 1
+    selection_method_4 = 1
 
     A = 0.8
     B = 0.8
@@ -99,7 +99,7 @@ class Config:
 
     # Entorno a un optimo
     optimal_fitness = 41.05775193
-    delta = 4
+    delta = 1
 
     # Estructura
     irrelevant_percentage = 0.05
