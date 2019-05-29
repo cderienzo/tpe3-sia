@@ -38,11 +38,11 @@ class Config:
     mutation_geneticity = 2
 
     # 1 = Uniforme, 2 = No Uniforme
-    mutation_uniformity = 1
+    mutation_uniformity = 2
 
-    delta_mutation_prob = 0.0001
-    p_m = 0.3
-
+    initial_p_m = 0.3
+    p_m = initial_p_m
+    p_m_cooling_alpha = 0.0001
     ###################
     #### SELECCION ####
     ###################
@@ -53,17 +53,17 @@ class Config:
     selection_method_3 = 1
     selection_method_4 = 1
 
-    A = 0.8
-    B = 0.8
+    A = 0.6
+    B = 0.55
 
     # Boltzmann: Temperaturas inicial y final
-    initial_temperature = 373
+    initial_temperature = 18000
     final_temperature = 273
 
-    # 1 = Exponential Multiplicative, 2 = Logarithmical Multiplicative, 3 = Linear Multiplicative, 4 = Linear Additive
-    cooling_schedule = 4
+    # 1 = Quadratic Multiplicative, 2 = Logarithmical Multiplicative, 3 = Linear Multiplicative, 4 = Linear Additive
+    cooling_schedule = 1
     
-    # For schedule 1: alpha between 0.8 and 0.9, for schedule 2: alpha > 1, for schedule 3: alpha > 0 
+    # For schedule 1: alpha > 0 , for schedule 2: alpha > 1, for schedule 3: alpha > 0 
     cooling_alpha = 1.5
     
     # Rounds for tournament selection method
@@ -95,7 +95,7 @@ class Config:
     max_consecutive_generations = 100
 
     # Maxima cantidad de generaciones
-    num_generations = 20
+    num_generations = 3384
 
     # Entorno a un optimo
     optimal_fitness = 41.05775193

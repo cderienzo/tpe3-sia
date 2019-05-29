@@ -3,7 +3,7 @@ import random
 from Config import Config
 from Loader import Loader
 from items import *
-
+from State import State
 class GeneticAlgorithm():
 
     # Create an initial seed population
@@ -69,6 +69,6 @@ class GeneticAlgorithm():
 
     def mutation(self, offspring):
         if (Config.mutation_uniformity == 2):
-            Config.p_m -= Config.delta_mutation_prob
+            Config.p_m = Config.initial_p_m / (1 + Config.p_m_cooling_alpha * pow(State.generation,2))
         return Loader.mutation()(offspring)
 
