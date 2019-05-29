@@ -95,8 +95,20 @@ def probabilistic_tournaments(population, fitness, GA, size):
     return random.sample(selection, size)
 
 def ranking(population, fitness, GA, size):
-    # TODO
-    return None
+    population = population.copy()
+    population.sort(key=lambda val: GA.fitness([val]))
+    selection = []
+    for i in range(0,size):
+        n = len(population)
+        dividend = n * (n + 1) / 2
+
+        p = [x/dividend for x in range(1,n+1)]
+
+        r = random.choices(numpy.arange(0, n), p)
+        selection.append(population[r[0]])
+        del population[r[0]]
+
+    return selection
 
 def accum_fitness(fitness):
     accumulated_fitness = numpy.empty(len(fitness))
