@@ -4,6 +4,7 @@ from Config import Config
 from State import State
 
 def elite(population, fitness, GA, size):
+    population = population.copy()
     population.sort(key=lambda val: GA.fitness([val]))
     return random.sample(population[len(population) - Config.k:], size)
 

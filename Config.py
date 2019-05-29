@@ -94,8 +94,13 @@ class Config:
     # TODO que valor deberia ir?
     max_consecutive_generations = 100
 
+    # Maxima cantidad de generaciones
     num_generations = 20
 
-    # Para la condicion de corte de entorno a un optimo donde se llega a un fitness inferior a un delta.
+    # Entorno a un optimo
     optimal_fitness = 41.05775193
-    delta = 2
+    delta = 4
+
+    # Estructura
+    irrelevant_percentage = 0.05
+    delta_variation_fitness = 2
