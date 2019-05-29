@@ -17,9 +17,9 @@ class Config:
     #### POBLACION ####
     ###################
 
-    N = 150
+    N = 400
 
-    k = 120
+    k = 300
 
     ###############
     #### CRUZA ####
@@ -35,13 +35,13 @@ class Config:
     ##################
 
     # 1 = Gen, 2 = MultiGen
-    mutation_geneticity = 1
+    mutation_geneticity = 2
 
     # 1 = Uniforme, 2 = No Uniforme
     mutation_uniformity = 1
 
     delta_mutation_prob = 0.0001
-    p_m = 0.7
+    p_m = 0.3
 
     ###################
     #### SELECCION ####
