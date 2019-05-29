@@ -41,7 +41,7 @@ class Config:
     mutation_uniformity = 1
 
     delta_mutation_prob = 0.0001
-    p_m = 0.1
+    p_m = 0.3
 
     ###################
     #### SELECCION ####
