@@ -5,6 +5,8 @@ from State import State
 
 def finished():
     finish = False
+    if (Config.kicking):
+        return kicking_finished()
     if (Config.max_generations):
         finish = finish or max_generations_finished()
     if not finish and (Config.structure):
@@ -31,7 +33,7 @@ def structure_finished():
     fitness_changed = GA.fitness(changed)
     best_match_idx_changed = numpy.where(fitness_changed == numpy.max(fitness_changed))
     index_changed = best_match_idx_changed[0][0]
-    if (abs(fitness_changed[index_changed] - fitness[index]) < Config.delta_variation_fitness):
+    if ((fitness_changed[index_changed] - fitness[index]) < Config.delta_variation_fitness):
         return False    
 
     return True
@@ -50,7 +52,7 @@ def content_finished():
 def near_optimal_finished():
     if State.generation == 0:
         return False
-    return abs(Config.optimal_fitness - fitness[index]) < Config.delta 
+    return (Config.optimal_fitness - fitness[index]) < Config.delta 
 
 def kicking_finished():
     if State.last_population is None:
@@ -62,13 +64,13 @@ def kicking_finished():
     if (len(changed) > Config.irrelevant_percentage * len(population)):
         return False
     
-
     distance = Config.optimal_fitness - fitness[index]
     if  distance > Config.delta:         
         Config.p_m += Config.p_m*0.5*numpy.tanh(distance)
         return False
 
     return True
+
 GA = GeneticAlgorithm()
 
 population = GA.seed()

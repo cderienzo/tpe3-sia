@@ -38,7 +38,7 @@ class Config:
     mutation_geneticity = 2
 
     # 1 = Uniforme, 2 = No Uniforme
-    mutation_uniformity = 2
+    mutation_uniformity = 1
 
     initial_p_m = 0.3
     p_m = initial_p_m
@@ -85,6 +85,7 @@ class Config:
     structure = False
     content = False
     near_optimal = True
+    kicking = True
     
     ###################################################
     #### CONFIGURACION PARA LOS CRITERIOS DE CORTE ####
