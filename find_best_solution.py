@@ -26,6 +26,8 @@ def structure_finished():
         return False
     
     changed = [individual for individual in population if individual not in State.last_population]
+    if(len(changed) == 0):
+        return True
     State.last_population = population
     if (len(changed) > Config.irrelevant_percentage * len(population)):
         return False
