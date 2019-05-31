@@ -11,16 +11,16 @@ def elite(population, fitness, GA, size):
 def roulette(population, fitness, GA, size):
     accumulated_fitness = accum_fitness(fitness)
     parents = []
-    roulette_values = numpy.random.uniform(low=0.0,high=1.0, size=Config.k)
+    roulette_values = numpy.random.uniform(low=0.0,high=1.0, size=size)
     
-    for i in range(Config.k):
+    for i in range(size):
         for k in range(len(accumulated_fitness)):
             if k > 0 and accumulated_fitness[k] > roulette_values[i] and accumulated_fitness[k-1] < roulette_values[i]:
                 parents.append(population[k])
             elif k==0 and accumulated_fitness[k] > roulette_values[i]:
                 parents.append(population[k])
 
-    return random.sample(parents, size)
+    return parents
 
 def universal(population, fitness, GA, size):
     r = numpy.random.uniform(low=0.0,high=1.0)
@@ -65,21 +65,21 @@ def boltzmann(population, fitness, GA, size):
 
 def deterministic_tournaments(population, fitness, GA, size):
     selection = []
-    for i in range(Config.tournament_rounds):
-        participants = numpy.random.randint(low=0, high=len(population), size=Config.k)
+    for i in range(size):
+        participants = numpy.random.randint(low=0, high=len(population), size=Config.tournament_participants)
         index = -1
-        for p in range(Config.k):
+        for p in range(Config.tournament_participants):
             if index == -1:
                 index = participants[0]
             elif fitness[index] < fitness[(participants[p])]:
                 index = participants[p]
             selection.append(population[index])
 
-    return random.sample(selection, size)
+    return selection
 
 def probabilistic_tournaments(population, fitness, GA, size):
     selection = []
-    for i in range(Config.k):
+    for i in range(size):
         participants = numpy.random.randint(low=0, high = len(population), size= 2)
         if numpy.random.random_sample() < 0.75:
             if fitness[participants[0]] < fitness[participants[1]]:
@@ -92,7 +92,7 @@ def probabilistic_tournaments(population, fitness, GA, size):
             else:
                 selection.append(population[participants[1]])
 
-    return random.sample(selection, size)
+    return selection
 
 def ranking(population, fitness, GA, size):
     population = population.copy()
