@@ -57,17 +57,17 @@ class Config:
     B = 0.45
 
     # Boltzmann: Temperaturas inicial y final
-    initial_temperature = 18000
-    final_temperature = 273
+    initial_temperature = 14
+    final_temperature = 2
 
     # 1 = Quadratic Multiplicative, 2 = Logarithmical Multiplicative, 3 = Linear Multiplicative, 4 = Linear Additive
     cooling_schedule = 1
     
     # For schedule 1: alpha > 0 , for schedule 2: alpha > 1, for schedule 3: alpha > 0 
-    cooling_alpha = 1.5
+    cooling_alpha = 0.97
     
-    # Rounds for tournament selection method
-    tournament_rounds = 3
+    # Participants for tournament selection method
+    tournament_participants = 3
 
     ###################
     #### REEMPLAZO ####
@@ -82,10 +82,10 @@ class Config:
 
     # Elegir True o False si se quiere que se corte por ese criterio o no
     max_generations = False
-    structure = False
+    structure = True
     content = False
     near_optimal = True
-    kicking = True
+    kicking = False
     
     ###################################################
     #### CONFIGURACION PARA LOS CRITERIOS DE CORTE ####
@@ -96,12 +96,12 @@ class Config:
     max_consecutive_generations = 100
 
     # Maxima cantidad de generaciones
-    num_generations = 3384
+    num_generations = 500
 
     # Entorno a un optimo
     optimal_fitness = 41.05775193
     delta = 1
 
     # Estructura
-    irrelevant_percentage = 0.05
+    irrelevant_percentage = 0.3
     delta_variation_fitness = 2
