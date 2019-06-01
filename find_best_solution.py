@@ -2,6 +2,7 @@ import numpy
 from GeneticAlgorithm import GeneticAlgorithm
 from Config import Config
 from State import State
+import matplotlib.pyplot as plt
 
 def finished():
     finish = False
@@ -68,14 +69,46 @@ def kicking_finished():
     
     distance = Config.optimal_fitness - fitness[index]
     if  distance > Config.delta:         
-        Config.p_m += Config.p_m*0.5*numpy.tanh(distance)
+        Config.p_m += Config.p_m*0.8*numpy.tanh(distance)
         return False
 
     return True
+def live_plotter(x_vec,y1_data,line1,identifier='',pause_time=0.1):
+    if line1==[]:
+        # this is the call to matplotlib that allows dynamic plotting
+        plt.ion()
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        # create a variable for the line so we can later update it
+        line1, = ax.plot(x_vec,y1_data,'-o',alpha=0.8)        
+        #update plot label/title
+        plt.ylabel('Standard Deviation')
+        plt.title('Standard Deviation Evolution')
+        plt.show()
+    line1.set_data(x_vec,y1_data)
+    # adjust limits if new data goes beyond bounds
+    if numpy.min(y1_data)<=line1.axes.get_ylim()[0] or numpy.max(y1_data)>=line1.axes.get_ylim()[1]:
+        plt.ylim([numpy.min(y1_data)-numpy.std(y1_data),numpy.max(y1_data)+numpy.std(y1_data)])
+    if numpy.max(x_vec) >= line1.axes.get_xlim()[1]:
+        plt.xlim([numpy.min(x_vec)-numpy.std(x_vec),numpy.max(x_vec)+numpy.std(x_vec)])
+    # this pauses the data so the figure/axis can catch up - the amount of pause can be altered above
+    plt.pause(pause_time)
+    
+    # return line so we can update it again in the next iteration
+    return line1
 
 GA = GeneticAlgorithm()
 
 population = GA.seed()
+
+# use ggplot style for more sophisticated visuals
+plt.style.use('ggplot')
+std_line = []
+y = 0
+x = 0
+std_x_vec = []
+std_y_vec = []
+
 
 while(not finished()):
     fitness = GA.fitness(population)
@@ -83,6 +116,12 @@ while(not finished()):
     index = best_match_idx[0][0]
     std = numpy.std(fitness)
     print("gen: ", State.generation,"  fitness: ", fitness[index]," std: ",std,"  height: ", population[index]['height'],"  items: ", population[index]['items'])
+    
+    # For no plotting comment lines below
+    std_y_vec = numpy.append(std_y_vec,std)
+    std_x_vec = numpy.append(std_x_vec,x)
+    x+=1
+    std_line = live_plotter(std_x_vec,std_y_vec,std_line)
 
     population = GA.replacement(population, fitness)
     State.generation += 1
@@ -96,3 +135,6 @@ index = best_match_idx[0][0]
 print("best solution : ", population[index])
 print("best solution fitness : ", fitness[index])
 print("-------------------------------------------------------------------------") 
+
+
+
