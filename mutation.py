@@ -10,7 +10,7 @@ def gene(offspring_crossover):
                 mutation_value = numpy.random.uniform(Config.min_height, Config.max_height)
                 offspring['height'] = mutation_value
             else:
-                mutation_value = numpy.random.random_integers(0, items_count())
+                mutation_value = numpy.random.random_integers(0, item_count())
                 offspring['items'][random_value] = mutation_value 
     return offspring_crossover
 
