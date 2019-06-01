@@ -81,7 +81,8 @@ while(not finished()):
     fitness = GA.fitness(population)
     best_match_idx = numpy.where(fitness == numpy.max(fitness))
     index = best_match_idx[0][0]
-    print("gen: ", State.generation,"  fitness: ", fitness[index],"  height: ", population[index]['height'],"  items: ", population[index]['items'])
+    std = numpy.std(fitness)
+    print("gen: ", State.generation,"  fitness: ", fitness[index]," std: ",std,"  height: ", population[index]['height'],"  items: ", population[index]['items'])
 
     population = GA.replacement(population, fitness)
     State.generation += 1

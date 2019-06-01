@@ -38,9 +38,9 @@ class Config:
     mutation_geneticity = 2
 
     # 1 = Uniforme, 2 = No Uniforme
-    mutation_uniformity = 1
+    mutation_uniformity = 2
 
-    initial_p_m = 0.3
+    initial_p_m = 0.1
     p_m = initial_p_m
     p_m_cooling_alpha = 0.0001
     ###################
@@ -57,8 +57,8 @@ class Config:
     B = 0.45
 
     # Boltzmann: Temperaturas inicial y final
-    initial_temperature = 14
-    final_temperature = 2
+    initial_temperature = 100
+    final_temperature = 23
 
     # 1 = Quadratic Multiplicative, 2 = Logarithmical Multiplicative, 3 = Linear Multiplicative, 4 = Linear Additive
     cooling_schedule = 1

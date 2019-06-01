@@ -6,7 +6,7 @@ from State import State
 def elite(population, fitness, GA, size):
     population = population.copy()
     population.sort(key=lambda val: GA.fitness([val]))
-    return random.sample(population[len(population) - Config.k:], size)
+    return population[len(population) - size:]
 
 def roulette(population, fitness, GA, size):
     accumulated_fitness = accum_fitness(fitness)
