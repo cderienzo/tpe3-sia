@@ -26,14 +26,14 @@ def universal(population, fitness, GA, size):
     r = numpy.random.uniform(low=0.0,high=1.0)
     r_j = []
 
-    for j in range(1, Config.k + 1):
-        r_j.append((r+j-1)/Config.k)
+    for j in range(1, size + 1):
+        r_j.append((r+j-1)/size)
 
     accumulated_fitness = accum_fitness(fitness)
 
     selection = []
 
-    for i in range(Config.k):
+    for i in range(size):
         for k in range(len(accumulated_fitness)):
             if k > 0 and accumulated_fitness[k] > r_j[i] and accumulated_fitness[k-1] < r_j[i]:
                 selection.append(population[k])
@@ -42,7 +42,7 @@ def universal(population, fitness, GA, size):
                 selection.append(population[k])
                 break
 
-    return random.sample(selection, size)
+    return selection
 
 def boltzmann(population, fitness, GA, size):
     boltzmann_fitness = []
