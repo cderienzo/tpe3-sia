@@ -105,3 +105,10 @@ class Config:
     # Estructura
     irrelevant_percentage = 0.02
     delta_variation_fitness = 2
+
+
+
+    ############
+    # GRAPHING #
+    ############
+    graph_std=1

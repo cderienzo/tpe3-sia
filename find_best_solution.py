@@ -121,7 +121,9 @@ while(not finished()):
     std_y_vec = numpy.append(std_y_vec,std)
     std_x_vec = numpy.append(std_x_vec,x)
     x+=1
-    std_line = live_plotter(std_x_vec,std_y_vec,std_line)
+
+    if(Config.graph_std==1):
+        std_line = live_plotter(std_x_vec,std_y_vec,std_line)
 
     population = GA.replacement(population, fitness)
     State.generation += 1
