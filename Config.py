@@ -40,9 +40,11 @@ class Config:
     # 1 = Uniforme, 2 = No Uniforme
     mutation_uniformity = 1
 
-    initial_p_m = 0.1
+    initial_p_m = 0.01
     p_m = initial_p_m
     p_m_cooling_alpha = 0
+
+    specialized_height_mutation = True #Hace que la mutación de altura se de en el entorno de la altura.
     ###################
     #### SELECCION ####
     ###################
@@ -111,5 +113,5 @@ class Config:
     ############
     # GRAPHING #
     ############
-    graph_std=1
-    graph_fit=1
+    graph_std=0
+    graph_fit=0
