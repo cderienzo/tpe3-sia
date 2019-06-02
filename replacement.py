@@ -21,12 +21,12 @@ def two(GA, population, fitness):
     offspring = []
 
     while(len(parents)!=0):
-        r1 = numpy.random.randint(low=0, high=len(parents)-1)
-        r2 = numpy.random.randint(low=0, high=len(parents)-1)
-        offspring.extend(GA.crossover(parents[r1], parents[r2]))
+        r1 = numpy.random.randint(low=0, high=len(parents))
+        parent1 = parents[r1]
         del parents[r1]
-        del parents[r2-1]
-
+        r2 = numpy.random.randint(low=0, high=len(parents))
+        offspring.extend(GA.crossover(parent1, parents[r2]))
+        del parents[r2]
     offspring = GA.mutation(offspring)
 
     offspring.extend(GA.select_pool(population, fitness, 'B', GA, len(population)-Config.k))
