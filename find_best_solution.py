@@ -73,7 +73,7 @@ def kicking_finished():
         return False
 
     return True
-def live_plotter(x_vec,y1_data,line1,identifier='',pause_time=0.1):
+def live_plotter(x_vec,y1_data,line1,xlabel,ylabel,title,pause_time=0.1):
     if line1==[]:
         # this is the call to matplotlib that allows dynamic plotting
         plt.ion()
@@ -82,15 +82,17 @@ def live_plotter(x_vec,y1_data,line1,identifier='',pause_time=0.1):
         # create a variable for the line so we can later update it
         line1, = ax.plot(x_vec,y1_data,'-o',alpha=0.8)        
         #update plot label/title
-        plt.ylabel('Standard Deviation')
-        plt.title('Standard Deviation Evolution')
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+        plt.title(title)
         plt.show()
     line1.set_data(x_vec,y1_data)
     # adjust limits if new data goes beyond bounds
-    if numpy.min(y1_data)<=line1.axes.get_ylim()[0] or numpy.max(y1_data)>=line1.axes.get_ylim()[1]:
+    if(numpy.min(y1_data)<=line1.axes.get_ylim()[0] or numpy.max(y1_data)>=line1.axes.get_ylim()[1]):
         plt.ylim([numpy.min(y1_data)-numpy.std(y1_data),numpy.max(y1_data)+numpy.std(y1_data)])
-    if numpy.max(x_vec) >= line1.axes.get_xlim()[1]:
+    if(numpy.max(x_vec) >= line1.axes.get_xlim()[1]):
         plt.xlim([numpy.min(x_vec)-numpy.std(x_vec),numpy.max(x_vec)+numpy.std(x_vec)])
+    
     # this pauses the data so the figure/axis can catch up - the amount of pause can be altered above
     plt.pause(pause_time)
     
@@ -104,10 +106,18 @@ population = GA.seed()
 # use ggplot style for more sophisticated visuals
 plt.style.use('ggplot')
 std_line = []
-y = 0
-x = 0
+fit_line_min = []
+fit_line_avg = []
+fit_line_max = []
 std_x_vec = []
 std_y_vec = []
+fit_line_min_x_vec = []
+fit_line_avg_x_vec = []
+fit_line_max_x_vec = []
+fit_line_min_y_vec = []
+fit_line_avg_y_vec = []
+fit_line_max_y_vec = []
+
 
 
 while(not finished()):
@@ -117,14 +127,16 @@ while(not finished()):
     std = numpy.std(fitness)
     print("gen: ", State.generation,"  fitness: ", fitness[index]," std: ",std,"  height: ", population[index]['height'],"  items: ", population[index]['items'])
     
-    # For no plotting comment lines below
-    std_y_vec = numpy.append(std_y_vec,std)
-    std_x_vec = numpy.append(std_x_vec,x)
-    x+=1
+    if(Config.graph_fit==1):
+        fit_line_avg_x_vec=numpy.append(fit_line_avg_x_vec, State.generation)
+        fit_line_avg_y_vec=numpy.append(fit_line_avg_y_vec, numpy.average(fitness))
+        fit_line_avg = live_plotter(fit_line_avg_x_vec,fit_line_avg_y_vec,fit_line_avg,"generations","fitness","average fitness per generation")
 
     if(Config.graph_std==1):
-        std_line = live_plotter(std_x_vec,std_y_vec,std_line)
-
+        std_y_vec=numpy.append(std_y_vec,std)
+        std_x_vec=numpy.append(std_x_vec,State.generation)
+        std_line = live_plotter(std_x_vec,std_y_vec,std_line,"generations","std","std per generation")
+    plt.draw()
     population = GA.replacement(population, fitness)
     State.generation += 1
 

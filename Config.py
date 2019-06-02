@@ -112,3 +112,4 @@ class Config:
     # GRAPHING #
     ############
     graph_std=1
+    graph_fit=1
