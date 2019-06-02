@@ -103,5 +103,5 @@ class Config:
     delta = 1
 
     # Estructura
-    irrelevant_percentage = 0.3
+    irrelevant_percentage = 0.02
     delta_variation_fitness = 2
