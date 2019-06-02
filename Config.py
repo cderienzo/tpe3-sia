@@ -17,9 +17,9 @@ class Config:
     #### POBLACION ####
     ###################
 
-    N = 400
+    N = 150
 
-    k = 300
+    k = 130
 
     ###############
     #### CRUZA ####
@@ -38,15 +38,15 @@ class Config:
     mutation_geneticity = 2
 
     # 1 = Uniforme, 2 = No Uniforme
-    mutation_uniformity = 2
+    mutation_uniformity = 1
 
     initial_p_m = 0.1
     p_m = initial_p_m
-    p_m_cooling_alpha = 0.0001
+    p_m_cooling_alpha = 0
     ###################
     #### SELECCION ####
     ###################
-
+    
     #  1 = Elite, 2 = Ruleta, 3 = Universal, 4 = Boltzmann, 5 = Torneos Deterministica, 6 = Torneos Probabilistica, 7 = Ranking
     selection_method_1 = 1
     selection_method_2 = 4
@@ -81,10 +81,10 @@ class Config:
     ###########################
 
     # Elegir True o False si se quiere que se corte por ese criterio o no
-    max_generations = False
-    structure = True
+    max_generations = True
+    structure = False
     content = False
-    near_optimal = True
+    near_optimal = False
     kicking = False
     
     ###################################################
@@ -96,7 +96,7 @@ class Config:
     max_consecutive_generations = 100
 
     # Maxima cantidad de generaciones
-    num_generations = 500
+    num_generations = 100000
 
     # Entorno a un optimo
     optimal_fitness = 41.05775193
