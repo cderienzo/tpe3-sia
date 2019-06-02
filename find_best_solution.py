@@ -68,7 +68,7 @@ def kicking_finished():
         return False
     
     distance = Config.optimal_fitness - fitness[index]
-    if  distance > Config.delta:         
+    if distance > Config.delta:
         Config.p_m += Config.p_m*0.8*numpy.tanh(distance)
         return False
 
@@ -80,7 +80,7 @@ def live_plotter(x_vec,y1_data,line1,xlabel,ylabel,title,pause_time=0.1):
         fig = plt.figure()
         ax = fig.add_subplot(111)
         # create a variable for the line so we can later update it
-        line1, = ax.plot(x_vec,y1_data,'-o',alpha=0.8)        
+        line1, = ax.plot(x_vec, y1_data, '-o', alpha=0.8)
         #update plot label/title
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
@@ -89,9 +89,9 @@ def live_plotter(x_vec,y1_data,line1,xlabel,ylabel,title,pause_time=0.1):
     line1.set_data(x_vec,y1_data)
     # adjust limits if new data goes beyond bounds
     if(numpy.min(y1_data)<=line1.axes.get_ylim()[0] or numpy.max(y1_data)>=line1.axes.get_ylim()[1]):
-        plt.ylim([numpy.min(y1_data)-numpy.std(y1_data),numpy.max(y1_data)+numpy.std(y1_data)])
+        plt.ylim([numpy.min(y1_data)-numpy.std(y1_data), numpy.max(y1_data)+numpy.std(y1_data)])
     if(numpy.max(x_vec) >= line1.axes.get_xlim()[1]):
-        plt.xlim([numpy.min(x_vec)-numpy.std(x_vec),numpy.max(x_vec)+numpy.std(x_vec)])
+        plt.xlim([numpy.min(x_vec)-numpy.std(x_vec), numpy.max(x_vec)+numpy.std(x_vec)])
     
     # this pauses the data so the figure/axis can catch up - the amount of pause can be altered above
     plt.pause(pause_time)
@@ -125,7 +125,7 @@ while(not finished()):
     best_match_idx = numpy.where(fitness == numpy.max(fitness))
     index = best_match_idx[0][0]
     std = numpy.std(fitness)
-    print("gen: ", State.generation,"  fitness: ", fitness[index]," std: ",std,"  height: ", population[index]['height'],"  items: ", population[index]['items'])
+    print("gen: ", State.generation,"  fitness: ", fitness[index]," std: ",std,"  height: ", population[index]['height'],"  items: ", population[index]['items']," pm: ",Config.p_m)
     
     if(Config.graph_fit==1):
         fit_line_avg_x_vec=numpy.append(fit_line_avg_x_vec, State.generation)

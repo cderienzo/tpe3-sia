@@ -11,7 +11,7 @@ def elite(population, fitness, GA, size):
 def roulette(population, fitness, GA, size):
     accumulated_fitness = accum_fitness(fitness)
     parents = []
-    roulette_values = numpy.random.uniform(low=0.0,high=1.0, size=size)
+    roulette_values = numpy.random.uniform(low=0.0, high=1.0, size=size)
     
     for i in range(size):
         for k in range(len(accumulated_fitness)):

@@ -4,12 +4,22 @@ from Config import Config
 from Loader import Loader
 from items import *
 from State import State
+import csv
 class GeneticAlgorithm():
+
+    @staticmethod
+    def append_file_population(population):
+        with open(Config.generation_0_file) as tsvfile:
+            tsvreader = csv.reader(tsvfile, delimiter="\t")
+            for line in tsvreader:
+                population.append({'height':float(line[0]), 'items': [int(line[1]),int(line[2]),int(line[3]),int(line[4]),int(line[5])]})
 
     # Create an initial seed population
     def seed(self):
         population = list()
-        for individual in range(Config.N):
+        if(Config.generation_method==1):
+            self.append_file_population(population)
+        for individual in range(Config.N-len(population)):
             population.append({'height': random.uniform(Config.min_height, Config.max_height), 'items': list(numpy.random.randint(0, item_count(), items_count()))})
         return population
 
@@ -71,4 +81,3 @@ class GeneticAlgorithm():
         if (Config.mutation_uniformity == 2):
             Config.p_m = 0.001+ Config.initial_p_m / (1 + Config.p_m_cooling_alpha * pow(State.generation,2))
         return Loader.mutation()(offspring)
-

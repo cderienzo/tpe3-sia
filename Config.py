@@ -21,6 +21,9 @@ class Config:
 
     k = 130
 
+    generation_method = 1
+    generation_0_file = "generation_0.tsv"
+
     ###############
     #### CRUZA ####
     ###############
@@ -40,9 +43,9 @@ class Config:
     # 1 = Uniforme, 2 = No Uniforme
     mutation_uniformity = 1
 
-    initial_p_m = 0.01
+    initial_p_m = 0
     p_m = initial_p_m
-    p_m_cooling_alpha = 0
+    p_m_cooling_alpha = 0.0001
 
     specialized_height_mutation = True #Hace que la mutación de altura se de en el entorno de la altura.
     ###################
@@ -59,8 +62,8 @@ class Config:
     B = 0.45
 
     # Boltzmann: Temperaturas inicial y final
-    initial_temperature = 100
-    final_temperature = 23
+    initial_temperature = 14
+    final_temperature = 2
 
     # 1 = Quadratic Multiplicative, 2 = Logarithmical Multiplicative, 3 = Linear Multiplicative, 4 = Linear Additive
     cooling_schedule = 1
@@ -83,7 +86,7 @@ class Config:
     ###########################
 
     # Elegir True o False si se quiere que se corte por ese criterio o no
-    max_generations = True
+    max_generations = False
     structure = False
     content = False
     near_optimal = False
