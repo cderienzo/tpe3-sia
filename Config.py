@@ -21,8 +21,8 @@ class Config:
 
     k = 130
 
-    generation_method = 1
-    generation_0_file = "generation_0.tsv"
+    generation_method = 0
+    generation_0_file = "best_genes_hidden.tsv"
 
     ###############
     #### CRUZA ####
