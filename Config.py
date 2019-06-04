@@ -92,6 +92,8 @@ class Config:
     near_optimal = False
     kicking = True
     
+    kicking_flag = 0
+    
     ###################################################
     #### CONFIGURACION PARA LOS CRITERIOS DE CORTE ####
     ###################################################

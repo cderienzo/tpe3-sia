@@ -68,9 +68,8 @@ def kicking_finished():
         return False
     
     distance = Config.optimal_fitness - fitness[index]
-    
     if  distance > Config.delta:         
-        Config.p_m = Config.initial_p_m
+        Config.kicking_flag = 1
         return False
 
     return True

@@ -79,5 +79,8 @@ class GeneticAlgorithm():
 
     def mutation(self, offspring):
         if (Config.mutation_uniformity == 2):
-            Config.p_m = 0.001+ Config.initial_p_m / (1 + Config.p_m_cooling_alpha * pow(State.generation,2))
+            if Config.kicking_flag == 1:
+                Config.p_m = 0.1
+            else:
+                Config.p_m = 0.001 + Config.initial_p_m / (1 + Config.p_m_cooling_alpha * pow(State.generation,2))
         return Loader.mutation()(offspring)
