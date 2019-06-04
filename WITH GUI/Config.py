@@ -125,8 +125,12 @@ class Config:
     #### PICTURES ####
     ##################
 
-    first = 10
-    second = 20
-    third = 30
-    forth = 40
-    fifth = 50
+    a = 25
+    b = 27.5
+    c = 30
+    d = 32.5
+    e = 35
+    f = 37.5
+    g = 40
+    h = 42.5
+    i = 45

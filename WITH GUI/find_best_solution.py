@@ -8,8 +8,6 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsScene, QGraphics
 from PyQt5.QtGui import QImage, QPixmap
 import matplotlib.pyplot as plt 
 
-changed = Config.N
-
 class MainWindow(QMainWindow, Ui_GeneticAlgorithm):
 
     def __init__(self):
@@ -18,7 +16,6 @@ class MainWindow(QMainWindow, Ui_GeneticAlgorithm):
         self.pushButton.clicked.connect(self.start)
 
     def start(self):
-        global changed
         self.pushButton.setEnabled(False)
 
         GA = GeneticAlgorithm()
@@ -27,6 +24,7 @@ class MainWindow(QMainWindow, Ui_GeneticAlgorithm):
 
         # use ggplot style for more sophisticated visuals 
         plt.style.use('ggplot') 
+        
         changed_line = [] 
         fit_line = [] 
         changed_x_vec = [] 
@@ -37,13 +35,18 @@ class MainWindow(QMainWindow, Ui_GeneticAlgorithm):
         fitness = None
         index = None
 
-        first = QPixmap('gui/first.png')
-        second = QPixmap('gui/second.png')
-        third = QPixmap('gui/third.png')
-        forth = QPixmap('gui/forth.png')
-        fifth = QPixmap('gui/fifth.png')
+        a = QPixmap('gui/1.png')
+        b = QPixmap('gui/2.png')
+        c = QPixmap('gui/3.png')
+        d = QPixmap('gui/4.png')
+        e = QPixmap('gui/5.png')
+        f = QPixmap('gui/6.png')
+        g = QPixmap('gui/7.png')
+        h = QPixmap('gui/8.png')
+        i = QPixmap('gui/9.png')
+        j = QPixmap('gui/10.png')
         previmage = None
-        image = first
+        image = a
 
         while(not finished(GA, population, fitness, index)):
             fitness = GA.fitness(population)
@@ -53,15 +56,12 @@ class MainWindow(QMainWindow, Ui_GeneticAlgorithm):
             if(Config.graph_fit==1): 
                 fit_line_x_vec=numpy.append(fit_line_x_vec, State.generation) 
                 fit_line_y_vec=numpy.append(fit_line_y_vec, fitness[index]) 
-                fit_line = live_plotter(fit_line_x_vec,fit_line_y_vec,fit_line,"Generations","Fitness","Fitness per generation") 
+                fit_line = live_plotter(fit_line_x_vec,fit_line_y_vec,fit_line,"Generations","Max Fitness","Max Fitness per generation") 
   
             if(Config.graph_std==1):
-                changed_y = changed 
-                if (type(changed) != int):
-                    changed_y = len(changed)
-                changed_y_vec = numpy.append(changed_y_vec,changed_y) 
+                changed_y_vec = numpy.append(changed_y_vec, min(fitness)) 
                 changed_x_vec = numpy.append(changed_x_vec,State.generation) 
-                changed_line = live_plotter(changed_x_vec,changed_y_vec,changed_line,"Generations","Changed individuals","Changed individuals per generation") 
+                changed_line = live_plotter(changed_x_vec,changed_y_vec,changed_line,"Generations","Min Fitness","Min Fitness per generation") 
             plt.draw() 
             
             self.generation.setText(str(State.generation))
@@ -74,16 +74,24 @@ class MainWindow(QMainWindow, Ui_GeneticAlgorithm):
             self.items.repaint()
             self.pm.setText(str(Config.p_m))
             self.pm.repaint()
-            if (fitness[index] > Config.first and fitness[index] < Config.second):
-                image = first
-            elif (fitness[index] > Config.second and fitness[index] < Config.third):    
-                image = second
-            elif (fitness[index] > Config.third and fitness[index] < Config.forth):
-                image = third
-            elif (fitness[index] > Config.forth and fitness[index] < Config.fifth):
-                image = forth
-            elif (fitness[index] > Config.fifth):
-                image = fifth   
+            if (fitness[index] > Config.a and fitness[index] < Config.b):
+                image = b
+            elif (fitness[index] > Config.b and fitness[index] < Config.c):    
+                image = c
+            elif (fitness[index] > Config.c and fitness[index] < Config.d):
+                image = d
+            elif (fitness[index] > Config.d and fitness[index] < Config.e):
+                image = e
+            elif (fitness[index] > Config.e and fitness[index] < Config.f):
+                image = f
+            elif (fitness[index] > Config.f and fitness[index] < Config.g):
+                image = g
+            elif (fitness[index] > Config.g and fitness[index] < Config.h):
+                image = h
+            elif (fitness[index] > Config.h and fitness[index] < Config.i):
+                image = i
+            elif (fitness[index] > Config.i):
+                image = j  
             if (image != previmage):
                 previmage = image
                 self.character.setPixmap(image)
@@ -157,7 +165,6 @@ def near_optimal_finished(fitness, index):
     return (Config.optimal_fitness - fitness[index]) < Config.delta 
 
 def kicking_finished(population, fitness, index):
-    global changed
     if State.last_population is None:
         State.last_population = population
         return False
@@ -188,11 +195,13 @@ def live_plotter(x_vec,y1_data,line1,xlabel,ylabel,title,pause_time=0.1):
         plt.title(title) 
         plt.show() 
     line1.set_data(x_vec,y1_data) 
+
+    plt.ylim([0, 55]) 
+
     # adjust limits if new data goes beyond bounds 
-    if(numpy.min(y1_data)<=line1.axes.get_ylim()[0] or numpy.max(y1_data)>=line1.axes.get_ylim()[1]): 
-        plt.ylim([numpy.min(y1_data)-numpy.std(y1_data),numpy.max(y1_data)+numpy.std(y1_data)]) 
     if(numpy.max(x_vec) >= line1.axes.get_xlim()[1]): 
         plt.xlim([numpy.min(x_vec)-numpy.std(x_vec),numpy.max(x_vec)+numpy.std(x_vec)]) 
+    
     # this pauses the data so the figure/axis can catch up - the amount of pause can be altered above 
     plt.pause(pause_time) 
      
