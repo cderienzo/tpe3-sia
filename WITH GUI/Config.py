@@ -100,7 +100,6 @@ class Config:
     ###################################################
 
     # Maximas generaciones consecutivas sin mejorar el fitness para el criterio de corte de contenido 
-    # TODO que valor deberia ir?
     max_consecutive_generations = 100
 
     # Maxima cantidad de generaciones

@@ -1,5 +1,6 @@
 import numpy
 import sys
+from statistics import mean
 from GeneticAlgorithm import GeneticAlgorithm
 from Config import Config
 from State import State
@@ -25,10 +26,16 @@ class MainWindow(QMainWindow, Ui_GeneticAlgorithm):
         # use ggplot style for more sophisticated visuals 
         plt.style.use('ggplot') 
         
-        changed_line = [] 
+        changed_line = []
+        changed_line_2 = [] 
+        changed_line_3 = [] 
         fit_line = [] 
         changed_x_vec = [] 
-        changed_y_vec = [] 
+        changed_y_vec = []
+        changed_x_vec_2 = [] 
+        changed_y_vec_2 = [] 
+        changed_x_vec_3 = [] 
+        changed_y_vec_3 = [] 
         fit_line_x_vec = [] 
         fit_line_y_vec = [] 
 
@@ -62,6 +69,28 @@ class MainWindow(QMainWindow, Ui_GeneticAlgorithm):
                 changed_y_vec = numpy.append(changed_y_vec, min(fitness)) 
                 changed_x_vec = numpy.append(changed_x_vec,State.generation) 
                 changed_line = live_plotter(changed_x_vec,changed_y_vec,changed_line,"Generations","Min Fitness","Min Fitness per generation") 
+
+            changed_y_vec_2 = numpy.append(changed_y_vec_2, mean(fitness)) 
+            changed_x_vec_2 = numpy.append(changed_x_vec_2,State.generation) 
+            changed_line_2 = live_plotter(changed_x_vec_2,changed_y_vec_2,changed_line_2,"Generations","Avg Fitness","Avg Fitness per generation") 
+
+            if (Config.selection_method_1 == 4 or Config.selection_method_2 == 4 or Config.selection_method_3 == 4 or Config.selection_method_4 == 4):
+                schedule_id = Config.cooling_schedule
+                if schedule_id == 1:
+                    temp_i = 1 + Config.initial_temperature / (1 + Config.cooling_alpha * pow(State.generation,2))
+                elif schedule_id == 2:
+                    temp_i = 1 + Config.initial_temperature / (1 + (Config.cooling_alpha*numpy.log(State.generation+1)))
+                elif schedule_id == 3:
+                    temp_i = 1 + Config.initial_temperature / ( 1 + Config.cooling_alpha*State.generation)
+                elif schedule_id == 4:
+                    temp_i = 1 + Config.final_temperature + (Config.initial_temperature - Config.final_temperature)*((Config.num_generations - State.generation)/Config.num_generations)
+                else:
+                    temp_i = Config.initial_temperature - State.generation * (Config.initial_temperature - Config.final_temperature)/Config.num_generations
+
+                changed_y_vec_3 = numpy.append(changed_y_vec_3, temp_i) 
+                changed_x_vec_3 = numpy.append(changed_x_vec_3,State.generation) 
+                changed_line_3 = live_plotter(changed_x_vec_3,changed_y_vec_3,changed_line_3,"Generations","Boltzmann Temperature","Boltzmann Temperature per generation") 
+
             plt.draw() 
             
             self.generation.setText(str(State.generation))
@@ -74,6 +103,7 @@ class MainWindow(QMainWindow, Ui_GeneticAlgorithm):
             self.items.repaint()
             self.pm.setText(str(Config.p_m))
             self.pm.repaint()
+            
             if (fitness[index] > Config.a and fitness[index] < Config.b):
                 image = b
             elif (fitness[index] > Config.b and fitness[index] < Config.c):    
@@ -190,7 +220,7 @@ def live_plotter(x_vec,y1_data,line1,xlabel,ylabel,title,pause_time=0.1):
     if line1==[]: 
         # this is the call to matplotlib that allows dynamic plotting 
         plt.ion() 
-        fig = plt.figure() 
+        fig = plt.figure(frameon=False) 
         ax = fig.add_subplot(111) 
         # create a variable for the line so we can later update it 
         line1, = ax.plot(x_vec, y1_data, '-o', alpha=0.8)         
