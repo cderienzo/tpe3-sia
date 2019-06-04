@@ -41,11 +41,11 @@ class Config:
     mutation_geneticity = 2
 
     # 1 = Uniforme, 2 = No Uniforme
-    mutation_uniformity = 1
+    mutation_uniformity = 2
 
-    initial_p_m = 0
+    initial_p_m = 0.1
     p_m = initial_p_m
-    p_m_cooling_alpha = 0.0001
+    p_m_cooling_alpha = 0
 
     specialized_height_mutation = True #Hace que la mutación de altura se de en el entorno de la altura.
     ###################
@@ -58,12 +58,12 @@ class Config:
     selection_method_3 = 1
     selection_method_4 = 6
 
-    A = 0.6
-    B = 0.45
+    A = 0.5
+    B = 0.5
 
     # Boltzmann: Temperaturas inicial y final
-    initial_temperature = 14
-    final_temperature = 2
+    initial_temperature = 100
+    final_temperature = 23
 
     # 1 = Quadratic Multiplicative, 2 = Logarithmical Multiplicative, 3 = Linear Multiplicative, 4 = Linear Additive
     cooling_schedule = 1
@@ -90,7 +90,7 @@ class Config:
     structure = False
     content = False
     near_optimal = False
-    kicking = False
+    kicking = True
     
     ###################################################
     #### CONFIGURACION PARA LOS CRITERIOS DE CORTE ####
@@ -104,11 +104,11 @@ class Config:
     num_generations = 100000
 
     # Entorno a un optimo
-    optimal_fitness = 41.05775193
+    optimal_fitness = 60
     delta = 1
 
     # Estructura
-    irrelevant_percentage = 0.02
+    irrelevant_percentage = 0.1
     delta_variation_fitness = 2
 
 
