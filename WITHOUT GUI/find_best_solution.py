@@ -65,11 +65,15 @@ def kicking_finished():
     changed = [individual for individual in population if individual not in State.last_population]
     State.last_population = population
     if (len(changed) > Config.irrelevant_percentage * len(population)):
+        if Config.kicking_flag == 1:
+            Config.kicking_flag = 0
         return False
-    
     distance = Config.optimal_fitness - fitness[index]
     if  distance > Config.delta:         
-        Config.kicking_flag = 1
+        if Config.kicking_flag == 0:
+            Config.kicking_flag = 1
+        else:
+            Config.kicking_flag = 0
         return False
 
     return True
