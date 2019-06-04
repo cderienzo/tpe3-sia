@@ -37,9 +37,9 @@
 
     Existen dos posibilidades para ejecutar el proyecto. 
     - Si se desea que se muestre la interfaz gráfica y los gráficos que se mostraron en la presentación,
-        se debe ingresar a la carpeta WITH GUI desde la terminal y ejecutar:
-        >  python3 find_best_solution.py
+      se debe ingresar a la carpeta WITH GUI desde la terminal y ejecutar:
+      >  python3 find_best_solution.py
     - Depende del sistema operativo, las librerías que se utilizaron para la interfaz o los gráficos pueden no andar.
-        En ese caso, se debe ingresar a la carpeta WITHOUT GUI desde la terminal y ejecutar:
-        > python3 find_best_solution.py
+      En ese caso, se debe ingresar a la carpeta WITHOUT GUI desde la terminal y ejecutar:
+      > python3 find_best_solution.py
 
