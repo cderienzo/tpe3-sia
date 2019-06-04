@@ -45,7 +45,7 @@ class Config:
 
     initial_p_m = 0.1
     p_m = initial_p_m
-    p_m_cooling_alpha = 0
+    p_m_cooling_alpha = 0.0001
 
     specialized_height_mutation = True #Hace que la mutación de altura se de en el entorno de la altura.
     ###################
