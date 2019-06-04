@@ -1,6 +1,6 @@
 import pandas
 
-files = ['fulldata/armas.tsv', 'fulldata/botas.tsv', 'fulldata/cascos.tsv', 'fulldata/guantes.tsv', 'fulldata/pecheras.tsv']                 
+files = ['../fulldata/armas.tsv', '../fulldata/botas.tsv', '../fulldata/cascos.tsv', '../fulldata/guantes.tsv', '../fulldata/pecheras.tsv']                 
 item_count_global = 0
 
 data = [pandas.read_csv(x, sep='\t', header=0) for x in files]
