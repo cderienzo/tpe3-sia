@@ -1,5 +1,4 @@
-Trabajo Práctico Especial 3 - Algoritmos Genéticos 
-Grupo 9
+# Trabajo Práctico Especial 3 - Algoritmos Genéticos - Grupo 9 #
 
 #### IMPORTANTE ####
 
@@ -24,23 +23,23 @@ Grupo 9
 
 #### EJECUCIÓN ####
 
-Los archivos de fulldata no están subidos al repositorio debido a su peso.
-Sin embargo, para el correcto funcionamiento del trabajo, es necesario poner la carpeta fulldata en la carpeta del repositorio de manera que quede:
+    Los archivos de fulldata no están subidos al repositorio debido a su peso.
+    Sin embargo, para el correcto funcionamiento del trabajo, es necesario poner la carpeta fulldata en la carpeta del repositorio de manera que quede:
 
-sia-2019-1c-09
-    TP1
-    TP2
-    TP3
-        fulldata
-        WITH GUI
-        WITHOUT GUI
-        README.md
+    sia-2019-1c-09
+        TP1
+        TP2
+        TP3
+            fulldata
+            WITH GUI
+            WITHOUT GUI
+            README.md
 
-Existen dos posibilidades para ejecutar el proyecto. 
-  - Si se desea que se muestre la interfaz gráfica y los gráficos que se mostraron en la presentación,
-    se debe ingresar a la carpeta WITH GUI desde la terminal y ejecutar:
-    >  python3 find_best_solution.py
-  - Depende del sistema operativo, las librerías que se utilizaron para la interfaz o los gráficos pueden no andar.
-    En ese caso, se debe ingresar a la carpeta WITHOUT GUI desde la terminal y ejecutar:
-    > python3 find_best_solution.py
+    Existen dos posibilidades para ejecutar el proyecto. 
+    - Si se desea que se muestre la interfaz gráfica y los gráficos que se mostraron en la presentación,
+        se debe ingresar a la carpeta WITH GUI desde la terminal y ejecutar:
+        >  python3 find_best_solution.py
+    - Depende del sistema operativo, las librerías que se utilizaron para la interfaz o los gráficos pueden no andar.
+        En ese caso, se debe ingresar a la carpeta WITHOUT GUI desde la terminal y ejecutar:
+        > python3 find_best_solution.py
 
