@@ -69,7 +69,8 @@ def kicking_finished():
     
     distance = Config.optimal_fitness - fitness[index]
     if distance > Config.delta:
-        Config.p_m += Config.p_m*0.8*numpy.tanh(distance)
+    if  distance > Config.delta:         
+        Config.p_m = Config.initial_p_m
         return False
 
     return True
