@@ -7,6 +7,8 @@ from State import State
 import csv
 class GeneticAlgorithm():
 
+    kicked_gen = 0
+
     @staticmethod
     def append_file_population(population):
         with open(Config.generation_0_file) as tsvfile:
@@ -78,9 +80,11 @@ class GeneticAlgorithm():
         return Loader.crossover()(parent1, parent2)
 
     def mutation(self, offspring):
+
         if (Config.mutation_uniformity == 2):
-            if Config.kicking_flag == 1: 
-                Config.p_m = 0.1 
+            if Config.kicking_flag == 1 and Config.kicking: 
+                Config.p_m = Config.initial_p_m 
+                GeneticAlgorithm.kicked_gen = State.generation 
             else: 
-                Config.p_m = 0.001 + Config.initial_p_m / (1 + Config.p_m_cooling_alpha * pow(State.generation,2)) 
+                Config.p_m = 0.001 + Config.initial_p_m / (1 + Config.p_m_cooling_alpha * pow((State.generation-GeneticAlgorithm.kicked_gen),2))  
         return Loader.mutation()(offspring)
