@@ -68,7 +68,7 @@ def kicking_finished():
         return False
     
     distance = Config.optimal_fitness - fitness[index]
-    if distance > Config.delta:
+    
     if  distance > Config.delta:         
         Config.p_m = Config.initial_p_m
         return False
