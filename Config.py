@@ -41,7 +41,7 @@ class Config:
     mutation_geneticity = 2
 
     # 1 = Uniforme, 2 = No Uniforme
-    mutation_uniformity = 2
+    mutation_uniformity = 1
 
     initial_p_m = 0.1
     p_m = initial_p_m
@@ -89,8 +89,8 @@ class Config:
     max_generations = False
     structure = False
     content = False
-    near_optimal = False
-    kicking = True
+    near_optimal = True
+    kicking = False
     
     kicking_flag = 0
     
@@ -99,21 +99,18 @@ class Config:
     ###################################################
 
     # Maximas generaciones consecutivas sin mejorar el fitness para el criterio de corte de contenido 
-    # TODO que valor deberia ir?
     max_consecutive_generations = 100
 
     # Maxima cantidad de generaciones
-    num_generations = 100000
+    num_generations = 1000000
 
     # Entorno a un optimo
-    optimal_fitness = 60
+    optimal_fitness = 50
     delta = 1
 
     # Estructura
-    irrelevant_percentage = 0.1
+    irrelevant_percentage = 0.02
     delta_variation_fitness = 2
-
-
 
     ############
     # GRAPHING #
