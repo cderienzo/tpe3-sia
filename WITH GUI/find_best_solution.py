@@ -29,6 +29,7 @@ class MainWindow(QMainWindow, Ui_GeneticAlgorithm):
         changed_line = []
         changed_line_2 = [] 
         changed_line_3 = [] 
+        changed_line_4 = [] 
         fit_line = [] 
         changed_x_vec = [] 
         changed_y_vec = []
@@ -36,6 +37,8 @@ class MainWindow(QMainWindow, Ui_GeneticAlgorithm):
         changed_y_vec_2 = [] 
         changed_x_vec_3 = [] 
         changed_y_vec_3 = [] 
+        changed_x_vec_4 = [] 
+        changed_y_vec_4 = [] 
         fit_line_x_vec = [] 
         fit_line_y_vec = [] 
 
@@ -59,20 +62,25 @@ class MainWindow(QMainWindow, Ui_GeneticAlgorithm):
             fitness = GA.fitness(population)
             best_match_idx = numpy.where(fitness == numpy.max(fitness))
             index = best_match_idx[0][0]
+
+            if (Config.mutation_uniformity == 2):
+                changed_y_vec_4 = numpy.append(changed_y_vec_4, Config.p_m) 
+                changed_x_vec_4 = numpy.append(changed_x_vec_4,State.generation) 
+                changed_line_4 = live_plotter(changed_x_vec_4,changed_y_vec_4,changed_line_4,"Generations","Mutation Probability","Mutation Probability per generation", resize=True) 
             
             if(Config.graph_fit==1): 
                 fit_line_x_vec=numpy.append(fit_line_x_vec, State.generation) 
                 fit_line_y_vec=numpy.append(fit_line_y_vec, fitness[index]) 
-                fit_line = live_plotter(fit_line_x_vec,fit_line_y_vec,fit_line,"Generations","Max Fitness","Max Fitness per generation") 
+                fit_line = live_plotter(fit_line_x_vec,fit_line_y_vec,fit_line,"Generations","Max Fitness","Max Fitness per generation", resize=False) 
   
             if(Config.graph_std==1):
                 changed_y_vec = numpy.append(changed_y_vec, min(fitness)) 
                 changed_x_vec = numpy.append(changed_x_vec,State.generation) 
-                changed_line = live_plotter(changed_x_vec,changed_y_vec,changed_line,"Generations","Min Fitness","Min Fitness per generation") 
+                changed_line = live_plotter(changed_x_vec,changed_y_vec,changed_line,"Generations","Min Fitness","Min Fitness per generation", resize=False) 
 
             changed_y_vec_2 = numpy.append(changed_y_vec_2, mean(fitness)) 
             changed_x_vec_2 = numpy.append(changed_x_vec_2,State.generation) 
-            changed_line_2 = live_plotter(changed_x_vec_2,changed_y_vec_2,changed_line_2,"Generations","Avg Fitness","Avg Fitness per generation") 
+            changed_line_2 = live_plotter(changed_x_vec_2,changed_y_vec_2,changed_line_2,"Generations","Avg Fitness","Avg Fitness per generation", resize=False) 
 
             if (Config.selection_method_1 == 4 or Config.selection_method_2 == 4 or Config.selection_method_3 == 4 or Config.selection_method_4 == 4):
                 schedule_id = Config.cooling_schedule
@@ -89,7 +97,7 @@ class MainWindow(QMainWindow, Ui_GeneticAlgorithm):
 
                 changed_y_vec_3 = numpy.append(changed_y_vec_3, temp_i) 
                 changed_x_vec_3 = numpy.append(changed_x_vec_3,State.generation) 
-                changed_line_3 = live_plotter(changed_x_vec_3,changed_y_vec_3,changed_line_3,"Generations","Boltzmann Temperature","Boltzmann Temperature per generation") 
+                changed_line_3 = live_plotter(changed_x_vec_3,changed_y_vec_3,changed_line_3,"Generations","Boltzmann Temperature","Boltzmann Temperature per generation", resize=False) 
 
             plt.draw() 
             
@@ -216,7 +224,7 @@ def kicking_finished(population, fitness, index):
 
     return True
 
-def live_plotter(x_vec,y1_data,line1,xlabel,ylabel,title,pause_time=0.1): 
+def live_plotter(x_vec,y1_data,line1,xlabel,ylabel,title,pause_time=0.1, resize=False): 
     if line1==[]: 
         # this is the call to matplotlib that allows dynamic plotting 
         plt.ion() 
@@ -231,7 +239,10 @@ def live_plotter(x_vec,y1_data,line1,xlabel,ylabel,title,pause_time=0.1):
         plt.show() 
     line1.set_data(x_vec,y1_data) 
 
-    plt.ylim([0, 55]) 
+    if resize:
+        plt.ylim([0, 1])
+    else:
+        plt.ylim([0, 55]) 
 
     # adjust limits if new data goes beyond bounds 
     if(numpy.max(x_vec) >= line1.axes.get_xlim()[1]): 
