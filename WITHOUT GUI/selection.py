@@ -73,7 +73,7 @@ def deterministic_tournaments(population, fitness, GA, size):
                 index = participants[0]
             elif fitness[index] < fitness[(participants[p])]:
                 index = participants[p]
-            selection.append(population[index])
+        selection.append(population[index])
 
     return selection
 
